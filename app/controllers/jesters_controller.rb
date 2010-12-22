@@ -1,7 +1,6 @@
 class JestersController < ApplicationController
   def index
-    @jesters = Jester.active.all(:include => { :availability => :show })
-    
+    @jesters = Jester.active.all(:include => { :availability => :show }).to_a
   end
   
   def new

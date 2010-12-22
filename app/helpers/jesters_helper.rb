@@ -27,4 +27,15 @@ module JestersHelper
     content_tag :div, last.strftime("%d %b").sub(/^0/, ''), :class => :"last-mced data", :"data-value" => last.to_formatted_s(:db) if last
   end
   
+  def portrait(jester, size = 32)
+    filename = "/images/jesters/#{size}/#{jester.image}.jpg"
+    Rails.logger.info filename.red
+    url = if File.exist?(File.join(Rails.root, "public", filename))
+      filename
+    else
+      "http://placehold.it/#{size}x#{size}&text=Jester"
+    end
+    image_tag url, :alt => jester.to_s
+  end
+  
 end

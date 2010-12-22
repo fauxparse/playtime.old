@@ -364,6 +364,12 @@ h1 {
   line-height: 1.0em;
 }
 
+h1 img {
+  vertical-align: -10%;
+  -webkit-box-shadow: black 0px 0px 4px;
+  -moz-box-shadow: black 0px 0px 4px;
+}
+
 h1 small {
   color: #666;
   font-size: 50%;
@@ -475,9 +481,17 @@ dd small {
   position: absolute;
   top: 0px;
   left: 0px;
-  padding: 0px 8px;
+  padding: 0px 8px 0px 44px;
   text-decoration: none;
   font-weight: bold;
+}
+
+.jester .name img {
+  position: absolute;
+  left: 0px;
+  top: 5px;
+  -webkit-box-shadow: black 0px 0px 4px;
+  -moz-box-shadow: black 0px 0px 4px;
 }
 
 .jester .data {

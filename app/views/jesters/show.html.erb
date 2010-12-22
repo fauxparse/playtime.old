@@ -1,6 +1,6 @@
 <% content_for :header do %>
   <div class="grid_12 alpha omega">
-    <h1><%= @jester %> <%= content_tag :small, "← that’s you" if current_jester == @jester %></h1>
+    <h1><%= portrait @jester, 48 %> <%= @jester %> <%= content_tag :small, "← that’s you" if current_jester == @jester %></h1>
   </div>
 <% end %>
 

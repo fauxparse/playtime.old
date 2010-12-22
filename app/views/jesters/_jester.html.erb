@@ -1,5 +1,8 @@
 <%= content_tag :div, :class => :jester, :id => dom_id(jester) do %>
-  <%= link_to jester, jester_path(jester), :class => :name %>
+  <%= link_to jester_path(jester), :class => :name do %>
+    <%= portrait jester %>
+    <strong><%= jester %></strong>
+  <% end %>
   <%= play_percentage jester %>
   <%= last_played jester %>
   <%= last_mced jester %>

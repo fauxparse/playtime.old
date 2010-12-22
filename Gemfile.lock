@@ -38,11 +38,14 @@ GEM
     arel (2.0.6)
     authlogic (2.1.6)
       activesupport
+    babosa (0.2.0)
     builder (2.1.2)
     colored (1.2)
     configuration (1.1.0)
     erubis (2.6.6)
       abstract (>= 1.0.0)
+    friendly_id (3.1.6)
+      babosa (~> 0.2.0)
     heroku (1.12.1)
       json_pure (>= 1.2.0, < 1.5.0)
       launchy (~> 0.3.2)
@@ -95,6 +98,7 @@ PLATFORMS
 DEPENDENCIES
   authlogic
   colored
+  friendly_id
   heroku
   json_pure (= 1.4.6a)!
   pg
