@@ -1,0 +1,7 @@
+<h1>Edit Jester</h1>
+
+<%= form_for @jester, :as => :jester, :url => jester_path(@jester) do |f| %>
+  <%= render :partial => "form", :object => f %>
+  <%= f.submit "Update" %>
+<% end %>
+

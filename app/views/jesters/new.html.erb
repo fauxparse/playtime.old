@@ -1,0 +1,7 @@
+<h1>New Jester</h1>
+
+<%= form_for @jester, :as => :jester, :url => jesters_path do |f| %>
+  <%= f.error_messages %>
+  <%= render :partial => "form", :object => f %>
+  <%= f.submit "Save" %>
+<% end %>
