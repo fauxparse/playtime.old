@@ -1,0 +1,70 @@
+<% content_for :header do %>
+  <h1>All Jesters</h1>
+  <div id="sort-headers">
+    <a href="#play-percentage" data-kind="numeric" data-order="descending">Play %</a>
+    <a href="#last-played" data-kind="date" data-order="descending">Last Played</a>
+    <a href="#last-mced" data-kind="date" data-order="descending">Last MCed</a>
+  </div>
+<% end %>
+
+<%= render :partial => @jesters %>
+
+<% content_for :scripts do %>
+  <script type="text/javascript">
+    window.addEvent('domready', function() {
+      $$('.jester').each(function(e, i) { e.index = i; });
+      
+      $$('#sort-headers a').each(function(header) {
+        header.addEvent('click', function() {
+          if (!this.hasClass('active')) {
+            var column = this.get('href').substring(1),
+                kind = this.get('data-kind') || 'numeric',
+                order = this.get('data-order') || 'descending',
+                before = this.getAllPrevious('a').reverse(),
+                after = this.getAllNext('a');
+                
+            this.addClass('active').getSiblings().removeClass('active');
+            $$('.jester .data').removeClass('active');
+            $$('.jester .' + column).addClass('active');
+                
+            before.push(this);
+            before.each(function(a, i) {
+              left = a.getStyle('left');
+              left = (left == 'auto') ? 0 : parseInt(left || '0');
+              morph = { left:[left, i * 128] };
+              a.morph(morph);
+              $$('.jester .' + a.get('href').substring(1)).morph(morph);
+            });
+            after.each(function(a, i) {
+              left = a.getStyle('left');
+              left = (left == 'auto') ? 0 : parseInt(left || '0');
+              morph = { left:[left, 768 - (after.length - i) * 128] };
+              a.morph(morph);
+              $$('.jester .' + a.get('href').substring(1)).morph(morph);
+            }); 
+            morph = { left:[parseInt($$('.jester:first-child .name').getStyle('left') || '0'), 128 * before.length] }
+            $$('.jester .name').morph(morph);
+          
+            var sorted = $$('.jester').sort(function(a, b) {
+              ab = [a, b].map(function(e) {
+                switch (kind) {
+                case 'numeric':
+                  return parseFloat(e.getElement('.' + column).get('data-value'));
+                case 'date':
+                  d = e.getElement('.' + column);
+                  if (!d) return null;
+                  dmy = d.get('data-value').split('-');
+                  return dmy.length ? new Date(parseInt(dmy[0]), parseInt(dmy[1] - 1), parseInt(dmy[2])) : null;
+                }
+              });
+              return (order == 'descending' ? -1 : 1) * (ab[0] < ab[1] ? -1 : ab[0] > ab[1] ? 1 : 0);
+            }).map(function(e) { return e.index; });
+            new Fx.Sort($$('.jester')).sort(sorted);
+          }
+          
+          return false;
+        });
+      })[0].fireEvent('click');
+    });
+  </script>
+<% end %>

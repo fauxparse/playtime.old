@@ -398,10 +398,6 @@ a { color: #ec008c; }
   padding: 4px;
   font-size: 125%;
   font-weight: bold;
-  -webkit-border-bottom-left-radius: 8px;
-  -webkit-border-bottom-right-radius: 8px;
-  -moz-border-radius-bottomleft: 8px;
-  -moz-border-radius-bottomright: 8px;
   -webkit-box-shadow: black 0px 0px 4px;
   -moz-box-shadow: black 0px 0px 4px;
 }
@@ -464,6 +460,65 @@ dd small {
   font-size: 66.66%;
   font-weight: normal;
   color: #999;
+}
+
+.jester {
+  position: relative;
+  height: 3em;
+  border-bottom: 1px solid #444;
+}
+
+.jester .name {
+  font-size: 2em;
+  line-height: 1.5em;
+  vertical-align: middle;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  padding: 0px 8px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.jester .data {
+  position: absolute;
+  top: 0px;
+  width: 112px;
+  padding: 0px 16px 0px 0px;
+  font-size: 2em;
+  line-height: 1.5em;
+  vertical-align: middle;
+  text-align: right;
+  color: #666;
+}
+
+.jester .active {
+  color: #eee;
+}
+
+#sort-headers {
+  position: relative;
+  height: 1.5em;
+  line-height: 1.5em;
+  vertical-align: middle;
+}
+
+#sort-headers a {
+  position: absolute;
+  bottom: 0px;
+  height: 1.5em;
+  line-height: 1.5em;
+  vertical-align: middle;
+  color: #666;
+  width: 112px;
+  padding-right: 8px;
+  text-align: right;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+#sort-headers a.active {
+  color: #eee;
 }
 
 /* }}} */

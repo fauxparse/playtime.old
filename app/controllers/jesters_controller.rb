@@ -1,4 +1,9 @@
 class JestersController < ApplicationController
+  def index
+    @jesters = Jester.active.all(:include => { :availability => :show })
+    
+  end
+  
   def new
     @jester = Jester.new
   end

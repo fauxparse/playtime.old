@@ -8,6 +8,8 @@ class Jester < ActiveRecord::Base
   has_many :availability, :class_name => "Player", :inverse_of => :jester
   has_many :shows, :through => :availability
   
+  scope :active, where(:active => true)
+  
   def name
     super || [ first_name, last_initial ].join(" ").strip
   end

@@ -7,5 +7,5 @@ Playtime::Application.routes.draw do
   get "logout" => "jester_sessions#destroy", :as => :logout
   resource :session, :controller => "jester_sessions"
 
-  root :to => "jester_sessions#new"
+  root :to => "jesters#index"
 end
