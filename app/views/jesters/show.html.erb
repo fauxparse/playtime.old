@@ -1,39 +1,24 @@
-<h1><%= @jester %></h1>
+<% content_for :header do %>
+  <div class="grid_12 alpha omega">
+    <h1><%= @jester %> <%= content_tag :small, "← that’s you" if current_jester == @jester %></h1>
+  </div>
+<% end %>
 
-<p>
-  <b>Email:</b>
-  <%= @jester.email %>
-</p>
-
-<p>
-  <b>Login count:</b>
-  <%= @jester.login_count %>
-</p>
-
-<p>
-  <b>Last request at:</b>
-  <%= @jester.last_request_at %>
-</p>
-
-<p>
-  <b>Last login at:</b>
-  <%= @jester.last_login_at %>
-</p>
-
-<p>
-  <b>Current login at:</b>
-  <%= @jester.current_login_at %>
-</p>
-
-<p>
-  <b>Last login ip:</b>
-  <%= @jester.last_login_ip %>
-</p>
-
-<p>
-  <b>Current login ip:</b>
-  <%= @jester.current_login_ip %>
-</p>
-
-
-<%= link_to 'Edit', edit_account_path %>
+<div class="grid_4 alpha">
+  <dl>
+    <dt>Last played</dt>
+    <dd><%= extended_date @jester.last_played %></dd>
+  </dl>
+</div>
+<div class="grid_4">
+  <dl>
+    <dt>Last MCed</dt>
+    <dd><%= extended_date @jester.last_mced %></dd>
+  </dl>
+</div>
+<div class="grid_4 omega">
+  <dl>
+    <dt>Current percentage</dt>
+    <dd><%= "%.1f%%" % @jester.percentage(3.months) %> <small>(Last 3 months)</small></dd>
+  </dl>
+</div>

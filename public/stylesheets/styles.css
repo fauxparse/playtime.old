@@ -1,0 +1,477 @@
+/* Grid {{{ */
+
+/*
+	Variable Grid System.
+	Learn more ~ http://www.spry-soft.com/grids/
+	Based on 960 Grid System - http://960.gs/
+	http://www.spry-soft.com/grids/grid.css?column_width=48&column_amount=12&gutter_width=16
+
+	Licensed under GPL and MIT.
+*/
+
+
+/* Containers
+----------------------------------------------------------------------------------------------------*/
+.container_12 {
+	margin-left: auto;
+	margin-right: auto;
+	width: 768px;
+}
+
+/* Grid >> Global
+----------------------------------------------------------------------------------------------------*/
+
+.grid_1,
+.grid_2,
+.grid_3,
+.grid_4,
+.grid_5,
+.grid_6,
+.grid_7,
+.grid_8,
+.grid_9,
+.grid_10,
+.grid_11,
+.grid_12 {
+	display:inline;
+	float: left;
+	position: relative;
+	margin-left: 8px;
+	margin-right: 8px;
+}
+
+/* Grid >> Children (Alpha ~ First, Omega ~ Last)
+----------------------------------------------------------------------------------------------------*/
+
+.alpha {
+	margin-left: 0;
+}
+
+.omega {
+	margin-right: 0;
+}
+
+/* Grid >> 12 Columns
+----------------------------------------------------------------------------------------------------*/
+
+.container_12 .grid_1 {
+	width:48px;
+}
+
+.container_12 .grid_2 {
+	width:112px;
+}
+
+.container_12 .grid_3 {
+	width:176px;
+}
+
+.container_12 .grid_4 {
+	width:240px;
+}
+
+.container_12 .grid_5 {
+	width:304px;
+}
+
+.container_12 .grid_6 {
+	width:368px;
+}
+
+.container_12 .grid_7 {
+	width:432px;
+}
+
+.container_12 .grid_8 {
+	width:496px;
+}
+
+.container_12 .grid_9 {
+	width:560px;
+}
+
+.container_12 .grid_10 {
+	width:624px;
+}
+
+.container_12 .grid_11 {
+	width:688px;
+}
+
+.container_12 .grid_12 {
+	width:752px;
+}
+
+
+
+/* Prefix Extra Space >> 12 Columns
+----------------------------------------------------------------------------------------------------*/
+
+.container_12 .prefix_1 {
+	padding-left:64px;
+}
+
+.container_12 .prefix_2 {
+	padding-left:128px;
+}
+
+.container_12 .prefix_3 {
+	padding-left:192px;
+}
+
+.container_12 .prefix_4 {
+	padding-left:256px;
+}
+
+.container_12 .prefix_5 {
+	padding-left:320px;
+}
+
+.container_12 .prefix_6 {
+	padding-left:384px;
+}
+
+.container_12 .prefix_7 {
+	padding-left:448px;
+}
+
+.container_12 .prefix_8 {
+	padding-left:512px;
+}
+
+.container_12 .prefix_9 {
+	padding-left:576px;
+}
+
+.container_12 .prefix_10 {
+	padding-left:640px;
+}
+
+.container_12 .prefix_11 {
+	padding-left:704px;
+}
+
+
+
+/* Suffix Extra Space >> 12 Columns
+----------------------------------------------------------------------------------------------------*/
+
+.container_12 .suffix_1 {
+	padding-right:64px;
+}
+
+.container_12 .suffix_2 {
+	padding-right:128px;
+}
+
+.container_12 .suffix_3 {
+	padding-right:192px;
+}
+
+.container_12 .suffix_4 {
+	padding-right:256px;
+}
+
+.container_12 .suffix_5 {
+	padding-right:320px;
+}
+
+.container_12 .suffix_6 {
+	padding-right:384px;
+}
+
+.container_12 .suffix_7 {
+	padding-right:448px;
+}
+
+.container_12 .suffix_8 {
+	padding-right:512px;
+}
+
+.container_12 .suffix_9 {
+	padding-right:576px;
+}
+
+.container_12 .suffix_10 {
+	padding-right:640px;
+}
+
+.container_12 .suffix_11 {
+	padding-right:704px;
+}
+
+
+
+/* Push Space >> 12 Columns
+----------------------------------------------------------------------------------------------------*/
+
+.container_12 .push_1 {
+	left:64px;
+}
+
+.container_12 .push_2 {
+	left:128px;
+}
+
+.container_12 .push_3 {
+	left:192px;
+}
+
+.container_12 .push_4 {
+	left:256px;
+}
+
+.container_12 .push_5 {
+	left:320px;
+}
+
+.container_12 .push_6 {
+	left:384px;
+}
+
+.container_12 .push_7 {
+	left:448px;
+}
+
+.container_12 .push_8 {
+	left:512px;
+}
+
+.container_12 .push_9 {
+	left:576px;
+}
+
+.container_12 .push_10 {
+	left:640px;
+}
+
+.container_12 .push_11 {
+	left:704px;
+}
+
+
+
+/* Pull Space >> 12 Columns
+----------------------------------------------------------------------------------------------------*/
+
+.container_12 .pull_1 {
+	left:-64px;
+}
+
+.container_12 .pull_2 {
+	left:-128px;
+}
+
+.container_12 .pull_3 {
+	left:-192px;
+}
+
+.container_12 .pull_4 {
+	left:-256px;
+}
+
+.container_12 .pull_5 {
+	left:-320px;
+}
+
+.container_12 .pull_6 {
+	left:-384px;
+}
+
+.container_12 .pull_7 {
+	left:-448px;
+}
+
+.container_12 .pull_8 {
+	left:-512px;
+}
+
+.container_12 .pull_9 {
+	left:-576px;
+}
+
+.container_12 .pull_10 {
+	left:-640px;
+}
+
+.container_12 .pull_11 {
+	left:-704px;
+}
+
+
+
+
+/* Clear Floated Elements
+----------------------------------------------------------------------------------------------------*/
+
+/* http://sonspring.com/journal/clearing-floats */
+
+.clear {
+	clear: both;
+	display: block;
+	overflow: hidden;
+	visibility: hidden;
+	width: 0;
+	height: 0;
+}
+
+/* http://perishablepress.com/press/2008/02/05/lessons-learned-concerning-the-clearfix-css-hack */
+
+.clearfix:after {
+	clear: both;
+	content: ' ';
+	display: block;
+	font-size: 0;
+	line-height: 0;
+	visibility: hidden;
+	width: 0;
+	height: 0;
+}
+
+.clearfix {
+	display: inline-block;
+}
+
+* html .clearfix {
+	height: 1%;
+}
+
+.clearfix {
+	display: block;
+}
+
+/* }}} */
+
+body {
+  margin: 0px;
+  padding: 0px;
+  background: #111 url(/images/noise.png) repeat 0px 0px;
+  color: #eee;
+  -webkit-font-smoothing: antialiased;
+}
+
+body, td, input, select, textarea {
+  font: 14px/1.5em "Helvetica Neue", Arial, Helvetica, sans-serif;
+  letter-spacing: -0.1em;
+}
+
+/* Text styles {{{ */
+
+h1 {
+  font-size: 400%;
+  margin: 0px;
+  padding: 0.25em 0px;
+  line-height: 1.0em;
+}
+
+h1 small {
+  color: #666;
+  font-size: 50%;
+  line-height: 1.0em;
+  font-weight: normal;
+}
+
+a { color: #ec008c; }
+
+/* }}} */
+
+/* Header {{{ */
+
+#header-outer {
+}
+
+#header {
+  position: relative;
+}
+
+#header h1 {
+}
+
+#logged-in { position: relative; }
+
+#logged-in div {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 4px;
+  font-size: 125%;
+  font-weight: bold;
+  -webkit-border-bottom-left-radius: 8px;
+  -webkit-border-bottom-right-radius: 8px;
+  -moz-border-radius-bottomleft: 8px;
+  -moz-border-radius-bottomright: 8px;
+  -webkit-box-shadow: black 0px 0px 4px;
+  -moz-box-shadow: black 0px 0px 4px;
+}
+
+#logged-in a {
+  text-decoration: none;
+  padding: 0px 4px;
+  color: #333;
+}
+
+#logged-in a:hover { color: black; }
+
+#logged-in .current {
+  padding-right: 8px;
+  border-right: 1px solid #666;
+}
+
+#logged-in .logout {
+  font-size: 75%;
+  text-transform: uppercase;
+}
+
+/* }}} */
+
+/* Main {{{ */
+
+#main-outer {
+  background: #222;
+  border-top: 1px solid #333;
+  -webkit-box-shadow: black 0px 0px 4px;
+  -moz-box-shadow: black 0px 0px 4px;
+}
+
+#main {
+  padding: 0.75em 0px;
+  text-shadow: black 0px 1px 1px;
+}
+
+dl {
+  margin: 0px 0px 0.75em;
+  padding: 0px;
+}
+
+dt {
+  margin: 0px;
+  padding: 0px;
+  text-transform: uppercase;
+  color: #666;
+}
+
+dd {
+  margin: 0px 0px 0.75em;
+  padding: 0px;
+  font-size: 150%;
+  font-weight: bold;
+}
+
+dd small {
+  display: block;
+  font-size: 66.66%;
+  font-weight: normal;
+  color: #999;
+}
+
+/* }}} */
+
+/* Footer {{{ */
+
+#footer {
+  color: #666;
+}
+
+/* }}} */

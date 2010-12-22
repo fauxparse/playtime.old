@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  helper_method :current_session, :current_jester
   before_filter :require_login
 
 protected
@@ -9,11 +8,18 @@ protected
     return @current_session if defined?(@current_session)
     @current_session = JesterSession.find
   end
+  helper_method :current_session
 
   def current_jester
     return @current_jester if defined?(@current_jester)
     @current_jester = current_session.try :jester
   end
+  helper_method :current_jester
+  
+  def logged_in?
+    current_jester.present?
+  end
+  helper_method :logged_in?
 
   def require_login
     unless current_jester
