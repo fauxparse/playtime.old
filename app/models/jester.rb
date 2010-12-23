@@ -11,7 +11,7 @@ class Jester < ActiveRecord::Base
   has_friendly_id :name, :use_slug => true
   
   scope :active, where(:active => true)
-  
+
   def name
     super || [ first_name, last_initial ].join(" ").strip
   end
@@ -31,16 +31,24 @@ class Jester < ActiveRecord::Base
   end
   
   def last_played
-    shows.as_player.where("date < ?", Date.today).last.try :date
+    shows.as_player.where("date < ?", Date.today).includes(:players => :jester).last
   end
   memoize :last_played
   
+  def last_played_on
+    last_played.try :date
+  end
+  
   def last_mced
-    shows.as_mc.where("date < ?", Date.today).last.try :date
+    shows.as_mc.where("date < ?", Date.today).includes(:players => :jester).last
   end
   memoize :last_mced
   
-  def percentage(window = 3.months)
+  def last_mced_on
+    last_mced.try :date
+  end
+  
+  def percentage(window = 90.days)
     100.0 * shows.as_player.after(window.ago).count /
     shows.after(window.ago).count
   end

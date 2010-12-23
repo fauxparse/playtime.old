@@ -1,0 +1,10 @@
+<% content_tag :div, :class => "show container_12", :"data-id" => show.id do %>
+  <div class="grid_3 date alpha">
+    <h3><%= show.date.strftime("%e %b, %Y") %></h3>
+  </div>
+  <div class="grid_9 players omega">
+    <%= render :partial => "shows/player", :collection => show.players.select(&:mcing?) %>
+    <%= render :partial => "shows/player", :collection => show.players.select(&:playing?) %>
+  </div>
+  <div class="clear"></div>
+<% end %>

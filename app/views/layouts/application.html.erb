@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Playtime</title>
+  <title><%= [ yield(:title), "Playtime" ].reject(&:blank?).join(" | ") %></title>
   <%= stylesheet_link_tag :all %>
   <%= csrf_meta_tag %>
 </head>

@@ -1,6 +1,8 @@
 Playtime::Application.routes.draw do
   resource :account, :controller => "jesters"
-  resources :jesters
+  resources :jesters do
+    resources :data, :singular => :point
+  end
     
   get "login" => "jester_sessions#new", :as => :login
   post "login" => "jester_sessions#create"

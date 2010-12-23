@@ -1,3 +1,5 @@
+<% content_for :title, @jester %>
+
 <% content_for :header do %>
   <div class="grid_12 alpha omega">
     <h1><%= portrait @jester, 48 %> <%= @jester %> <%= content_tag :small, "← that’s you" if current_jester == @jester %></h1>
@@ -5,20 +7,109 @@
 <% end %>
 
 <div class="grid_4 alpha">
-  <dl>
+  <dl class="last-show-played-summary">
     <dt>Last played</dt>
-    <dd><%= extended_date @jester.last_played %></dd>
+    <dd><%= extended_date @jester.last_played_on %></dd>
   </dl>
 </div>
 <div class="grid_4">
-  <dl>
+  <dl class="last-show-mced-summary">
     <dt>Last MCed</dt>
-    <dd><%= extended_date @jester.last_mced %></dd>
+    <dd><%= extended_date @jester.last_mced_on %></dd>
   </dl>
 </div>
 <div class="grid_4 omega">
-  <dl>
+  <dl class="current-percentage-summary">
     <dt>Current percentage</dt>
-    <dd><%= "%.1f%%" % @jester.percentage(3.months) %> <small>(Last 3 months)</small></dd>
+    <dd><%= "%.1f%%" % @jester.percentage(90.days) %> <small>(Last 90 days)</small></dd>
   </dl>
 </div>
+
+<div class="grid_12 alpha omega explain last-show-played">
+  <h2>Last show played</h2>
+  <% if @jester.last_played %>
+    <%= render @jester.last_played %>
+  <% else %>
+    <p class="never"><%= @jester %> has <strong>never</strong> played a show.</p>
+  <% end %>
+</div>
+
+<div class="grid_12 alpha omega explain last-show-mced">
+  <h2>Last show MCed</h2>
+  <% if @jester.last_mced %>
+    <%= render @jester.last_mced %>
+  <% else %>
+    <p class="never"><%= @jester %> has <strong>never</strong> MCed a show.</p>
+  <% end %>
+</div>
+
+<div class="grid_12 alpha omega explain current-percentage">
+  <div class="graph">
+    <canvas></canvas>
+  </div>
+</div>
+
+<% content_for :scripts do %>
+  <script type="text/javascript" charset="utf-8">
+    var play_data = [];
+    
+    function rollingPercentage(date, window) {
+      date = date || (new Date()).getTime();
+      window = window || (90 * 24 * 60 * 60 * 1000); // 90-day window
+      var slice = play_data.filter(function(d) {
+        return (d[0] >= date - window) && (d[0] <= date);
+      });
+      if (slice.length) {
+        return 100.0 * slice.filter(function(d) { return d[1] != 'available'; }).length / slice.length;
+      } else {
+        return 0.0;
+      }
+    }
+  
+    window.addEvent('domready', function() {
+      $$('.last-show-played-summary, .last-show-mced-summary, .current-percentage-summary').addEvent('click', function() {
+        $$('.explain.' + this.get('class').replace(/-summary.*$/, ''))[0].setStyles({ display:'block' }).getSiblings('.explain').setStyles({ display:'none' });
+        return false;
+      })[0].fireEvent('click');
+      
+      new Request.JSON({
+  			url: '<%= jester_data_path(@jester, :json) %>',
+  			method: 'get',
+  			onComplete: function(data) {
+  			  play_data = data.points.map(function(d) {
+  			    return [ Date.parse(d[0]), d[1] ];
+  			  });
+  			  
+  			  graph = $$('.graph canvas')[0];
+  			  graph.width = 752;
+  			  graph.height = 128;
+  			  context = graph.getContext('2d');
+  			    			  
+  			  context.strokeStyle = '#eee';
+  			  context.lineWidth = 2;
+  			  context.beginPath();
+  			  context.moveTo(0, 0);
+  			  context.stroke();
+  			  
+  			  var one_day = 24 * 60 * 60 * 1000;
+  			  var date = (new Date()).getTime(), window = 365 * one_day;
+  			  date -= date % one_day;
+  			  var pen = false;
+  			  
+          context.beginPath();
+  			  for (i = 0; i <= window; i += one_day) {
+  			    var x = i * 752.0 / window, y = 128 * rollingPercentage(date -window + i) / 100.0;
+  			    if (pen) {
+  			      context.lineTo(x, 128 - y);
+  			    } else if (y > 0) {
+  			      context.moveTo(x, 128 - y);
+  			      console.log(x, y);
+  			      pen = true;
+  			    }
+  			  }
+          context.stroke();
+  			}
+  		}).send();
+    });
+  </script>
+<% end %>

@@ -468,6 +468,60 @@ dd small {
   color: #999;
 }
 
+.explain {
+  clear: left;
+  background: #111;
+  margin: 0px -8px 16px;
+  padding: 8px;
+  position: relative;
+}
+
+.explain:before {
+  content: '.';
+  overflow: hidden;
+  text-indent: -10em;
+  position: absolute;
+  left: 16px;
+  top: -12px;
+  border-left: 12px solid #111;
+  border-top: 12px solid transparent;
+  width: 0px;
+  height: 0px;
+}
+
+.last-show-mced:before { left: 272px; }
+.current-percentage:before { left: 528px; }
+
+.explain h2 {
+  margin: 0px 0px 8px;
+  padding: 4px 0px;
+  border-bottom: 1px solid #333;
+}
+
+.explain .never {
+  font-size: 150%;
+  color: #666;
+  text-align: center;
+  margin: 0px;
+  padding: 32px 0px;
+}
+
+.explain .graph {
+  width: 752px;
+  height: 128px;
+  background: #111;
+  position: relative;
+}
+
+.explain .graph canvas {
+  width: 752px;
+  height: 128px;
+}
+
+/* }}} */
+
+/* Index {{{ */
+
 .jester {
   position: relative;
   height: 3em;
@@ -535,7 +589,63 @@ dd small {
   color: #eee;
 }
 
+
+
 /* }}} */
+
+/* Shows {{{ */
+
+.show {
+  padding-bottom: 8px;
+}
+
+.show h3 {
+  margin: 0px;
+  padding: 4px 0px;
+  font-size: 150%;
+}
+
+.show h3 small {
+  font-size: 67%;
+  display: block;
+  color: #666;
+}
+
+.show .players {
+  display: block;
+  border-left: 1px solid #444;
+  margin-left: -8px;
+  padding-left: 7px;
+}
+
+.show .player {
+  position: relative;
+  height: 32px;
+  margin: 4px 0px;
+  line-height: 1em;
+}
+
+.show .player a {
+  position: absolute;
+  left: 40px;
+  top: 0px;
+  font-size: 125%;
+  color: #eee;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.show .player a:hover { color: #ec008c; }
+
+.show .player small {
+  position: absolute;
+  left: 40px;
+  bottom: 0px;
+  color: #666;
+  text-transform: uppercase;
+}
+
+/*}}}*/
 
 /* Footer {{{ */
 
