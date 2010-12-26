@@ -589,8 +589,6 @@ dd small {
   color: #eee;
 }
 
-
-
 /* }}} */
 
 /* Shows {{{ */
@@ -618,14 +616,14 @@ dd small {
   padding-left: 7px;
 }
 
-.show .player {
+.player {
   position: relative;
   height: 32px;
   margin: 4px 0px;
   line-height: 1em;
 }
 
-.show .player a {
+.player a {
   position: absolute;
   left: 40px;
   top: 0px;
@@ -635,9 +633,9 @@ dd small {
   font-weight: bold;
 }
 
-.show .player a:hover { color: #ec008c; }
+.player a:hover { color: #ec008c; }
 
-.show .player small {
+.player small {
   position: absolute;
   left: 40px;
   bottom: 0px;

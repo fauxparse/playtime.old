@@ -54,4 +54,39 @@ class Jester < ActiveRecord::Base
   end
   memoize :percentage
   
+  def favourite_players(n = 5)
+    Jester.find_by_sql <<-SQL
+      SELECT j.id, j.first_name, j.last_name, j.name, j.admin, j.image, COUNT(j.id) AS frequency
+      FROM shows s
+      JOIN players mc ON mc.show_id = s.id
+      JOIN players p ON p.show_id = s.id
+      JOIN jesters j ON j.id = p.jester_id
+      WHERE mc.role = 'mc'
+      AND mc.jester_id = #{id}
+      AND p.role = 'player'
+      GROUP BY j.id, j.first_name, j.last_name, j.name, j.admin, j.image
+      ORDER BY frequency DESC
+      LIMIT #{n}
+    SQL
+  end
+  memoize :favourite_players
+  
+  def most_seen_with(n = 5)
+    Jester.find_by_sql <<-SQL
+      SELECT j.id, j.first_name, j.last_name, j.name, j.admin, j.image, COUNT(j.id) AS frequency
+      FROM shows s
+      JOIN players me ON me.show_id = s.id
+      JOIN players p ON p.show_id = s.id
+      JOIN jesters j ON j.id = p.jester_id
+      WHERE me.role = 'player'
+      AND me.jester_id = #{id}
+      AND p.jester_id <> #{id}
+      AND p.role = 'player'
+      GROUP BY j.id, j.first_name, j.last_name, j.name, j.admin, j.image
+      ORDER BY frequency DESC
+      LIMIT #{n}
+    SQL
+  end
+  memoize :most_seen_with
+  
 end

@@ -1,0 +1,5 @@
+<%= content_tag :div, :class => "favourite player" do %>
+  <%= portrait favourite, 32 %>
+  <%= link_to favourite, jester_path(favourite) %>
+  <small><%= pluralize favourite.frequency, "show" %></small>
+<% end %>

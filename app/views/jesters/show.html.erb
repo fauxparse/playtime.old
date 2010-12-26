@@ -2,7 +2,7 @@
 
 <% content_for :header do %>
   <div class="grid_12 alpha omega">
-    <h1><%= portrait @jester, 48 %> <%= @jester %> <%= content_tag :small, "← that’s you" if current_jester == @jester %></h1>
+    <h1><%= portrait @jester, 48 %> <%= @jester %> <%= content_tag :small, "← that’s you!" if current_jester == @jester %></h1>
   </div>
 <% end %>
 
@@ -49,65 +49,107 @@
   </div>
 </div>
 
+<div class="grid_4 alpha">
+  <h2>Often seen with</h2>
+  <%= render :partial => "favourite", :collection => @jester.most_seen_with %>
+</div>
+
+<div class="grid_4">
+  <h2>Casting favourites</h2>
+  <%= render :partial => "favourite", :collection => @jester.favourite_players %>
+</div>
+
 <% content_for :scripts do %>
   <script type="text/javascript" charset="utf-8">
     var play_data = [];
+    var availability = {};
     
     function rollingPercentage(date, window) {
       date = date || (new Date()).getTime();
-      window = window || (90 * 24 * 60 * 60 * 1000); // 90-day window
+      window = window || (45 * 24 * 60 * 60 * 1000); // 90-day window
       var slice = play_data.filter(function(d) {
-        return (d[0] >= date - window) && (d[0] <= date);
+        return (d[0] >= date - window) && (d[0] <= date + window);
       });
       if (slice.length) {
-        return 100.0 * slice.filter(function(d) { return d[1] != 'available'; }).length / slice.length;
+        return 100.0 * slice.filter(function(d) { return d[1] == 'player'; }).length / slice.length;
       } else {
         return 0.0;
       }
+    }
+    
+    function formatDate(date) {
+      return date.getYear() + '-' + (date.getMonth() + 1) + '-' + date.getDay();
     }
   
     window.addEvent('domready', function() {
       $$('.last-show-played-summary, .last-show-mced-summary, .current-percentage-summary').addEvent('click', function() {
         $$('.explain.' + this.get('class').replace(/-summary.*$/, ''))[0].setStyles({ display:'block' }).getSiblings('.explain').setStyles({ display:'none' });
         return false;
-      })[0].fireEvent('click');
+      })[2].fireEvent('click');
       
       new Request.JSON({
   			url: '<%= jester_data_path(@jester, :json) %>',
   			method: 'get',
   			onComplete: function(data) {
   			  play_data = data.points.map(function(d) {
-  			    return [ Date.parse(d[0]), d[1] ];
+  			    dmy = d[0].split('-');
+  			    var date = new Date(parseInt(dmy[0]), parseInt(dmy[1] - 1), parseInt(dmy[2]));
+  			    availability[formatDate(date)] = d[1];
+  			    return [ date.getTime(), d[1] ];
   			  });
   			  
   			  graph = $$('.graph canvas')[0];
   			  graph.width = 752;
   			  graph.height = 128;
   			  context = graph.getContext('2d');
-  			    			  
+  			  
+  			  var one_day = 24 * 60 * 60 * 1000;
+  			  var date = (new Date()).getTime(), window = 365 * one_day;
+  			  date -= date % one_day;
+  			  
+          for (i = date - window; i < date; i+= one_day) {
+            var d = new Date(i), w = d.getDay();
+            if (w == 5 || w == 6) {
+              var x = (i - (date - window)) * 752 / window;
+              context.strokeStyle = availability[formatDate(d)] ? 'rgba(141,198,63,0.25)' : 'rgba(237,28,36,0.5)';
+              context.lineWidth = 1;
+      			  context.beginPath();
+      			  context.moveTo(x, 0);
+      			  context.lineTo(x, 128);
+      			  context.stroke();
+            }
+          }
+
   			  context.strokeStyle = '#eee';
   			  context.lineWidth = 2;
   			  context.beginPath();
   			  context.moveTo(0, 0);
   			  context.stroke();
   			  
-  			  var one_day = 24 * 60 * 60 * 1000;
-  			  var date = (new Date()).getTime(), window = 365 * one_day;
-  			  date -= date % one_day;
   			  var pen = false;
   			  
           context.beginPath();
   			  for (i = 0; i <= window; i += one_day) {
-  			    var x = i * 752.0 / window, y = 128 * rollingPercentage(date -window + i) / 100.0;
+  			    var x = i * 752.0 / window, y = 128 * rollingPercentage(date - window + i) / 100.0;
   			    if (pen) {
   			      context.lineTo(x, 128 - y);
   			    } else if (y > 0) {
   			      context.moveTo(x, 128 - y);
-  			      console.log(x, y);
   			      pen = true;
   			    }
   			  }
           context.stroke();
+          
+          play_data.each(function(d) {
+            if (d[1] == 'player' || d[1] == 'mc') {
+              context.fillStyle = d[1] == 'player' ? 'rgba(141,198,63,0.5)' : 'rgba(236,0,140,0.5)';
+              x = (d[0] - (date - window)) * 752 / window;
+              context.beginPath();
+              context.arc(x, 120 + (d[1] == 'mc' ? 4 : 0), 4, 0, Math.PI * 2);
+              context.fill();
+            }
+          });
+          
   			}
   		}).send();
     });
