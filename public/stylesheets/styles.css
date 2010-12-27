@@ -377,6 +377,10 @@ h1 small {
   font-weight: normal;
 }
 
+h2 {
+  margin: 8px 0px;
+}
+
 a { color: #ec008c; }
 
 /* }}} */
@@ -471,7 +475,7 @@ dd small {
 .explain {
   clear: left;
   background: #111;
-  margin: 0px -8px 16px;
+  margin: 0px -8px 8px;
   padding: 8px;
   position: relative;
 }
@@ -643,6 +647,15 @@ dd small {
   text-transform: uppercase;
 }
 
+.player img {
+  -webkit-box-shadow: black 0px 0px 4px;
+  -moz-box-shadow: black 0px 0px 4px;
+}
+
+.favourites .player {
+  margin-bottom: 8px;
+}
+
 /*}}}*/
 
 /* Footer {{{ */
@@ -652,3 +665,37 @@ dd small {
 }
 
 /* }}} */
+
+/* Tooltips {{{ */
+  
+[title] {
+  cursor: help;
+}
+
+.tip {
+  background: black;
+  background: rgba(0, 0, 0, 0.85);
+	color: #fff;
+	width: 172px;
+	z-index: 100;
+	padding: 8px;
+	font-size: 13px;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 6px;
+	-moz-box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 6px;
+}
+
+.tip:before {
+  content: '.';
+  overflow: hidden;
+  text-indent: -10em;
+  position: absolute;
+  left: 8px;
+  top: -12px;
+  border-left: 12px solid rgba(0, 0, 0, 0.5);
+  border-top: 12px solid transparent;
+  width: 0px;
+  height: 0px;
+}
+
+/* }}} */
+

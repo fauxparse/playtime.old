@@ -20,22 +20,22 @@
     <div id="header" class="container_12">
       <%= yield :header %>
     </div>
-    <div class="clear"></div>
+    <%= clear_floats %>
   </div>
   <div id="main-outer">
     <div id="main" class="container_12">
       <%= yield %>
     </div>
-    <div class="clear"></div>
+    <%= clear_floats %>
   </div>
   <div id="footer-outer">
     <div id="footer" class="container_12">
       <p>&copy; 2011 The Court Jesters</p>
     </div>
-    <div class="clear"></div>
+    <%= clear_floats %>
   </div>
   
-  <%= javascript_include_tag "mootools.js", "mootools-more", "rails" %>
+  <%= javascript_include_tag "mootools.js", "mootools-more", "rails", "application" %>
   <%= yield :scripts %>
 </body>
 </html>

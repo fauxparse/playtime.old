@@ -1,2 +1,3 @@
-// Place your application-specific JavaScript functions and classes here
-// This file is automatically included by javascript_include_tag :defaults
+var toolTips = new Tips('[title]', {
+  offset: { x:-8, y:16 }
+});

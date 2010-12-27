@@ -6,5 +6,5 @@
     <%= render :partial => "shows/player", :collection => show.players.select(&:mcing?) %>
     <%= render :partial => "shows/player", :collection => show.players.select(&:playing?) %>
   </div>
-  <div class="clear"></div>
+  <%= clear_floats %>
 <% end %>

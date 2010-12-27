@@ -38,4 +38,8 @@ module JestersHelper
     image_tag url, :alt => jester.to_s
   end
   
+  def clear_floats
+    content_tag :div, "", :class => :clear
+  end
+  
 end

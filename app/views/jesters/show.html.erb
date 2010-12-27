@@ -49,15 +49,21 @@
   </div>
 </div>
 
-<div class="grid_4 alpha">
-  <h2>Often seen with</h2>
+<div class="grid_4 alpha favourites">
+  <h2 title="The players alongside whom this Jester is most often cast">Often seen with</h2>
   <%= render :partial => "favourite", :collection => @jester.most_seen_with %>
 </div>
 
-<div class="grid_4">
-  <h2>Casting favourites</h2>
+<div class="grid_4 favourites">
+  <h2 title="The players most frequently cast when this Jester has MCed">Casting favourites</h2>
   <%= render :partial => "favourite", :collection => @jester.favourite_players %>
 </div>
+
+<div class="grid_4 omega">
+  
+</div>
+
+<%= clear_floats %>
 
 <% content_for :scripts do %>
   <script type="text/javascript" charset="utf-8">
