@@ -42,4 +42,11 @@ module JestersHelper
     content_tag :div, "", :class => :clear
   end
   
+  def navigation(name, target = nil, options = {})
+    target ||= send :"#{options[:controller] || name}_path"
+    title = options[:title] || name.to_s.humanize
+    active = (controller.controller_name == (options[:controller] || name.to_s))
+    link_to title, target, :class => "#{name}#{' active' if active}"
+  end
+  
 end

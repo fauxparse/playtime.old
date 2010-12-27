@@ -385,6 +385,72 @@ a { color: #ec008c; }
 
 /* }}} */
 
+/* Navigation {{{ */
+
+#navigation-outer {
+  background: #333;
+  height: 32px;
+  -webkit-box-shadow: inset rgba(255, 255, 255, 0.1) 0px 16px 1px;
+  -moz-box-shadow: inset rgba(255, 255, 255, 0.1) 0px 16px 1px;
+}
+
+#navigation {
+  position: relative;
+}
+
+#navigation ul {
+  float: left;
+  height: 32px;
+  margin: 0px -8px;
+  padding: 0px;
+  border-left: 1px solid #222;
+  border-right: 1px solid #444;
+}
+
+#navigation ul li {
+  display: inline;
+  list-style: none;
+}
+
+#navigation a {
+  float: left;
+  display: block;
+  list-style: none;
+  border-left: 1px solid #444;
+  border-right: 1px solid #222;
+  line-height: 32px;
+  vertical-align: middle;
+  font-size: 150%;
+  font-weight: bold;
+  padding: 0px 7px;
+  text-decoration: none;
+  color: #999;
+  text-shadow: black 0px -1px 1px;
+}
+
+#navigation a:hover,
+#navigation a.current {
+  background: #444;
+  color: #ccc;
+  border-left-color: #555;
+  border-right-color: #333;
+  -webkit-box-shadow: inset rgba(255, 255, 255, 0.1) 0px 16px 1px;
+  -moz-box-shadow: inset rgba(255, 255, 255, 0.1) 0px 16px 1px;
+}
+
+#navigation a.active,
+#navigation a.active:hover {
+  color: #eee;
+  background: #111;
+  border: none;
+  padding: 0px 8px;
+  text-shadow: #ec008c 0px 0px 4px;
+  -webkit-box-shadow: inset rgba(0, 0, 0, 0.5) 0px 1px 4px;
+  -moz-box-shadow: inset rgba(0, 0, 0, 0.5) 0px 1px 4px;
+}
+
+/* }}} */
+
 /* Header {{{ */
 
 #header-outer {
@@ -397,37 +463,17 @@ a { color: #ec008c; }
 #header h1 {
 }
 
-#logged-in { position: relative; }
-
-#logged-in div {
+#logged-in {
   position: absolute;
   top: 0px;
   right: 0px;
   z-index: 10;
-  background: rgba(255, 255, 255, 0.5);
-  padding: 4px;
-  font-size: 125%;
+  padding: 0px;
   font-weight: bold;
-  -webkit-box-shadow: black 0px 0px 4px;
-  -moz-box-shadow: black 0px 0px 4px;
-}
-
-#logged-in a {
-  text-decoration: none;
-  padding: 0px 4px;
-  color: #333;
-}
-
-#logged-in a:hover { color: black; }
-
-#logged-in .current {
-  padding-right: 8px;
-  border-right: 1px solid #666;
-}
-
-#logged-in .logout {
-  font-size: 75%;
-  text-transform: uppercase;
+  line-height: 32px;
+  vertical-align: middle;
+  border-left: 1px solid #222;
+  border-right: 1px solid #444;
 }
 
 /* }}} */

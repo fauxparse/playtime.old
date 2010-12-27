@@ -6,16 +6,23 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
-  <% if logged_in? %>
-    <div id="logged-in-outer">
-      <div id="logged-in" class="container_12">
-        <div>
+  <div id="navigation-outer">
+    <div id="navigation" class="container_12">
+      <ul>
+        <li><%= navigation :jesters, root_path %></li>
+        <li><%= navigation :shows %></li>
+        <li><%= navigation :availability %></li>
+      </ul>
+
+      <% if logged_in? %>
+        <div id="logged-in">
           <%= link_to current_jester, jester_path(current_jester), :class => :current %>
           <%= link_to "Log out", logout_path, :class => :logout %>
         </div>
-      </div>
+      <% end %>
     </div>
-  <% end %>
+  </div>
+  
   <div id="header-outer">
     <div id="header" class="container_12">
       <%= yield :header %>

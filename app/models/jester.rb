@@ -56,7 +56,7 @@ class Jester < ActiveRecord::Base
   
   def favourite_players(n = 5)
     Jester.find_by_sql <<-SQL
-      SELECT j.id, j.first_name, j.last_name, j.name, j.admin, j.image, COUNT(j.id) AS frequency
+      SELECT j.id, j.first_name, j.last_name, j.name, j.admin, j.image, j.cached_slug, COUNT(j.id) AS frequency
       FROM shows s
       JOIN players mc ON mc.show_id = s.id
       JOIN players p ON p.show_id = s.id
@@ -64,7 +64,7 @@ class Jester < ActiveRecord::Base
       WHERE mc.role = 'mc'
       AND mc.jester_id = #{id}
       AND p.role = 'player'
-      GROUP BY j.id, j.first_name, j.last_name, j.name, j.admin, j.image
+      GROUP BY j.id, j.first_name, j.last_name, j.name, j.admin, j.image, j.cached_slug
       ORDER BY frequency DESC
       LIMIT #{n}
     SQL
@@ -73,7 +73,7 @@ class Jester < ActiveRecord::Base
   
   def most_seen_with(n = 5)
     Jester.find_by_sql <<-SQL
-      SELECT j.id, j.first_name, j.last_name, j.name, j.admin, j.image, COUNT(j.id) AS frequency
+      SELECT j.id, j.first_name, j.last_name, j.name, j.admin, j.image, j.cached_slug, COUNT(j.id) AS frequency
       FROM shows s
       JOIN players me ON me.show_id = s.id
       JOIN players p ON p.show_id = s.id
@@ -82,7 +82,7 @@ class Jester < ActiveRecord::Base
       AND me.jester_id = #{id}
       AND p.jester_id <> #{id}
       AND p.role = 'player'
-      GROUP BY j.id, j.first_name, j.last_name, j.name, j.admin, j.image
+      GROUP BY j.id, j.first_name, j.last_name, j.name, j.admin, j.image, j.cached_slug
       ORDER BY frequency DESC
       LIMIT #{n}
     SQL
