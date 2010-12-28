@@ -4,7 +4,9 @@ Playtime::Application.routes.draw do
     resources :data, :singular => :point
   end
 
-  resource :availability, :controller => :availability
+  get "availability(/:date)" => "availability#show", :as => :availability
+  put "availability(/:date)" => "availability#update"
+  
   resources :shows
   
   get "login" => "jester_sessions#new", :as => :login

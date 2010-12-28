@@ -704,6 +704,141 @@ dd small {
 
 /*}}}*/
 
+/* Availability {{{ */
+
+.dates {
+  position: relative;
+  height: 40px;
+  margin: 0px 0px 16px;
+}
+
+.dates h2 {
+  margin: 0px 48px;
+  padding: 0px 8px;
+  vertical-align: middle;
+  line-height: 40px;
+  font-size: 200%;
+  background: #111;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-box-shadow: rgba(255, 255, 255, 0.15) 0px 1px 1px;
+}
+
+.dates .back,
+.dates .next {
+  background: black;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 40px;
+  color: #eee;
+  text-decoration: none;
+  font-size: 200%;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+}
+
+.dates .next { left: auto; right: 0px; }
+
+#availability .buttons {
+  position: relative;
+  left: 6px;
+  width: 184px;
+  margin-right: 0px;
+}
+
+#availability .button {
+  display: block;
+  float: left;
+  width: 5em;
+  padding: 5px 0px 6px;
+  background: #8dc63f;
+}
+
+#availability .wipe {
+  margin-right: 4px;
+  background: #ed1c24;
+}
+
+#main .availability {
+  position: relative;
+  background: #333;
+  margin: 0px 0px 8px;
+  height: 32px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+}
+
+.availability h3 {
+  margin: 0px;
+  position: absolute;
+  left: 44px;
+  top: 0px;
+  line-height: 32px;
+  vertical-align: middle;
+  font-size: 125%;
+}
+
+#availability .inactive {
+  opacity: 0.5;
+}
+
+#availability .inactive h3 {
+  color: #666;
+  text-shadow: rgba(0, 0, 0, 0.5) 0px -1px 1px;
+}
+
+.availability img {
+  display: block;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  -webkit-border-top-left-radius: 4px;
+  -webkit-border-bottom-left-radius: 4px;
+  -moz-border-radius-topleft: 4px;
+  -moz-border-radius-bottomleft: 4px;
+}
+
+.availability ul {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  height: 28px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.availability ul li {
+  display: block;
+  list-style: none;
+  float: left;
+  margin: 0px 0px 0px 2px;
+  padding: 0px;
+}
+
+.availability ul li label {
+  font-size: 125%;
+  display: block;
+  height: 28px;
+  line-height: 28px;
+  vertical-align: middle;
+  width: 5em;
+  text-align: center;
+  font-weight: bold;
+  background: #444;
+  text-shadow: rgba(0, 0, 0, 0.5) 0px -1px 1px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+}
+
+.availability label.active { background: #00aeef; }
+
+/* }}} */
+
 /* Footer {{{ */
 
 #footer {
@@ -742,6 +877,31 @@ dd small {
   width: 0px;
   height: 0px;
 }
+
+/* }}} */
+
+/* Buttons {{{ */
+
+.button, .button:visited {
+	background: #ec008c url(/images/alert-overlay.png) repeat-x; 
+	display: inline-block; 
+	padding: 5px 12px 6px; 
+	color: #fff; 
+	text-decoration: none;
+	border: none;
+	text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+	border-bottom: 1px solid rgba(0,0,0,0.25);
+	position: relative;
+	cursor: pointer;
+	font-weight: bold;
+	font-size: 125%;
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px;
+	-moz-box-shadow: rgba(0,0,0,0.5) 0 1px 3px;
+	-webkit-box-shadow: rgba(0,0,0,0.5) 0 1px 3px;
+}
+
+.button:hover { background-color: #c2117a; color: #fff; }
 
 /* }}} */
 

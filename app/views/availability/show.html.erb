@@ -4,4 +4,56 @@
   <h1>Availability</h1>
 <% end %>
 
-<p>Find me in app/views/availability/show.html.erb</p>
+<div id="availability" class="container_12">
+  <%= form_tag availability_path(@shows.first.date.to_s(:db)), :method => :put do %>
+    <div class="dates grid_9 alpha">
+      <h2><%= weekend @dates %></h2>
+      <%= link_to "◀", availability_path(@dates.first - 7), :class => "back" %>
+      <%= link_to "▶", availability_path(@dates.first + 7), :class => "next" %>
+    </div>
+    <div class="buttons grid_3 omega">
+      <%= button_to_function "Clear", "clearAvailability()", :class => "wipe button" %>
+      <%= submit_tag "Save", :class => "save button" %>
+    </div>
+
+    <% Jester.all.sort_by(&:name).in_groups(2, false).each_with_index do |group, i| %>
+      <%= content_tag :div, :class => "grid_6 #{i == 0 ? :alpha : :omega} availability-group" do %>
+        <% group.each do |jester| %>
+          <%= render "availability", :jester => jester, :shows => @shows %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+
+<% content_for :scripts do %>
+  <script>
+    var Toggle = new Class({
+      initialize: function(element) {
+        var self = this;
+        
+        self.element = element.getElement('label');
+        self.checkbox = element.getElement('input[type=checkbox]');
+        self.checkbox.setStyles({ display:'none' });
+        if (self.checkbox.checked) {
+          self.element.addClass('active');
+        }
+        self.element.addEvent('click', function() {
+          self.element.toggleClass('active');
+          self.checkbox.checked = self.element.hasClass('active');
+          return false;
+        });
+      }
+    });
+
+    window.addEvent('domready', function() {
+      $$('.availability ul li').each(function(li) {
+        new Toggle(li);
+      });
+    });
+    
+    function clearAvailability() {
+      $$('.availability ul li label.active').fireEvent('click');
+    }
+  </script>
+<% end %>

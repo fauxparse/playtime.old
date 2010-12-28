@@ -1,0 +1,9 @@
+<%= content_tag :div, :class => "availability#{' inactive' unless jester.active?}" do %>
+  <%= portrait jester, 32 %>
+  <h3><%= jester %></h3>
+  <ul>
+    <% shows.each do |show| %>
+      <li><%= availability_for show, jester %></li>
+    <% end %>
+  </ul>
+<% end %>

@@ -1,8 +1,12 @@
 require "csv"
 
 class Show < ActiveRecord::Base
+  has_friendly_id :date_slug, :use_slug => true
+  
   has_many :players, :inverse_of => :show, :dependent => :destroy
   has_many :jesters, :through => :players
+
+  validates_presence_of :date
   
   scope :after, lambda { |date| where("date > ?", date) }
   scope :before, lambda { |date| where("date < ?", date) }
@@ -35,6 +39,15 @@ class Show < ActiveRecord::Base
         row += 1
       end
     end
+  end
+  
+  def date_slug
+    date.to_s(:db)
+  end
+  
+  def availability=(ids)
+    Rails.logger.info "Availability => #{ids.inspect}".green
+    self.jester_ids = Array(ids).map(&:to_i)
   end
   
 end

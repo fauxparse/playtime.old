@@ -29,7 +29,6 @@ module JestersHelper
   
   def portrait(jester, size = 32)
     filename = "/images/jesters/#{size}/#{jester.image}.jpg"
-    Rails.logger.info filename.red
     url = if File.exist?(File.join(Rails.root, "public", filename))
       filename
     else
