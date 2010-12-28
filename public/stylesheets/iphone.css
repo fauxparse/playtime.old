@@ -1,0 +1,202 @@
+/* Grid reset {{{ */
+
+.container_12,
+.container_12 .grid_1,
+.container_12 .grid_2,
+.container_12 .grid_3,
+.container_12 .grid_4,
+.container_12 .grid_5,
+.container_12 .grid_6,
+.container_12 .grid_7,
+.container_12 .grid_8,
+.container_12 .grid_9,
+.container_12 .grid_10,
+.container_12 .grid_11,
+.container_12 .grid_12 {
+  width: auto;
+}
+
+/* }}} */
+
+/* Navigation {{{ */
+
+#navigation-outer {
+  position: relative;
+  padding-top: 24px;
+  -webkit-box-shadow: none;
+}
+
+#navigation ul {
+  margin: 0px;
+  border-left: none;
+}
+
+#logged-in {
+  position: absolute;
+  top: -24px;
+  left: 0px;
+  right: 0px;
+  background: black;
+  border: none;
+}
+
+#logged-in a,
+#logged-in a.current {
+  height: 24px;
+  line-height: 24px;
+  font-size: 125%;
+  border: none;
+  background: none;
+  -webkit-box-shadow: none;
+}
+
+#logged-in a.logout {
+  float: right;
+}
+
+/* }}} */
+
+/* Header {{{ */
+
+#header {
+  padding: 0px 8px;
+}
+
+#header h1 {
+  font-size: 250%;
+}
+
+#header h1 small {
+  display: none;
+}
+
+/* }}} */
+
+/* Main {{{ */
+
+#main {
+  padding: 8px;
+}
+
+/* }}} */
+
+/* Index {{{ */
+
+.jester .name,
+.jester .data {
+  font-size: 150%;
+  line-height: 2em;
+}
+
+.jester .data {
+  width: 72px;
+  opacity: 0.0;
+  color: #eee;
+  -webkit-transition: opacity 0.5s ease-out;
+}
+
+.jester .data.active {
+  opacity: 1.0;
+}
+
+.jester .name {
+  left: 80px;
+}
+
+#sort-headers a {
+  position: static;
+  float: left;
+  width: auto;
+  padding-right: 4px;
+  margin-right: 4px;
+  border-right: 1px solid #444;
+}
+
+#sort-headers a:last-child { border: none; }
+
+/* }}} */
+
+/* Jester {{{ */
+
+.info-summary .grid_4 {
+  margin: 0px;
+  padding: 0px;
+  float: none;
+}
+
+.explain {
+  display: none;
+}
+
+.favourites {
+  clear: left;
+  float: none;
+}
+
+/* }}} */
+
+/* Availability {{{ */
+
+#availability {
+  padding-top: 88px;
+  position: relative;
+}
+
+#availability .dates {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+
+#availability .dates h2 {
+  width: 192px;
+}
+
+#availability .buttons {
+  float: none;
+  left: 0px;
+  position: absolute;
+  left: 0px;
+  top: 48px;
+  width: auto;
+  margin: 0px;
+}
+
+#availability .button {
+  width: 148px;
+  margin: 0px;
+  padding: 2px 0px 3px;
+}
+
+#availability .wipe {
+  margin-right: 8px;
+}
+
+#availability .grid_6 {
+  clear: both;
+  float: none;
+  margin: 0px;
+}
+
+/* }}} */
+
+/* Footer {{{ */
+
+#footer {
+  padding: 8px 8px 40px;
+}
+
+#footer p {
+  margin: 0px;
+  padding: 0px;
+}
+
+/* }}} */
+
+/* Buttons {{{ */
+
+.button {
+  -webkit-appearance: none;
+}
+
+/* }}} */

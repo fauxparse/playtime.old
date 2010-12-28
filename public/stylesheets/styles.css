@@ -829,9 +829,10 @@ dd small {
   height: 28px;
   line-height: 28px;
   vertical-align: middle;
-  width: 5em;
+  width: 3em;
   text-align: center;
   font-weight: bold;
+  text-transform: uppercase;
   background: #444;
   text-shadow: rgba(0, 0, 0, 0.5) 0px -1px 1px;
   -webkit-border-radius: 2px;

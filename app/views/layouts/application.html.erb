@@ -3,9 +3,16 @@
 <head>
   <title><%= [ yield(:title), "Playtime" ].reject(&:blank?).join(" | ") %></title>
   <%= stylesheet_link_tag "styles" %>
+  <!--[if !IE]>-->
+  <%= stylesheet_link_tag "iphone", :media => "only screen and (max-device-width: 480px)" %>
+  <!--<![endif]-->
   <%= csrf_meta_tag %>
+  
+  <meta name="viewport" content="height=device-height,width=device-width,initial-scale=1,user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 </head>
-<body>
+<body class="portrait">
   <div id="navigation-outer">
     <div id="navigation" class="container_12">
       <ul>

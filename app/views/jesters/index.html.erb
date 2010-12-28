@@ -26,24 +26,28 @@
             this.addClass('active').getSiblings().removeClass('active');
             $$('.jester .data').removeClass('active');
             $$('.jester .' + column).addClass('active');
-                
-            before.push(this);
-            before.each(function(a, i) {
-              left = a.getStyle('left');
-              left = (left == 'auto') ? 0 : parseInt(left || '0');
-              morph = { left:[left, i * 128] };
-              a.morph(morph);
-              $$('.jester .' + a.get('href').substring(1)).morph(morph);
-            });
-            after.each(function(a, i) {
-              left = a.getStyle('left');
-              left = (left == 'auto') ? 0 : parseInt(left || '0');
-              morph = { left:[left, 768 - (after.length - i) * 128] };
-              a.morph(morph);
-              $$('.jester .' + a.get('href').substring(1)).morph(morph);
-            }); 
-            morph = { left:[parseInt($$('.jester:first-child .name').getStyle('left') || '0'), 128 * before.length] }
-            $$('.jester .name').morph(morph);
+
+            if (Browser.Platform.ios) { // TODO: iPhone only, not iPad
+
+            } else {
+              before.push(this);
+              before.each(function(a, i) {
+                left = a.getStyle('left');
+                left = (left == 'auto') ? 0 : parseInt(left || '0');
+                morph = { left:[left, i * 128] };
+                a.morph(morph);
+                $$('.jester .' + a.get('href').substring(1)).morph(morph);
+              });
+              after.each(function(a, i) {
+                left = a.getStyle('left');
+                left = (left == 'auto') ? 0 : parseInt(left || '0');
+                morph = { left:[left, 768 - (after.length - i) * 128] };
+                a.morph(morph);
+                $$('.jester .' + a.get('href').substring(1)).morph(morph);
+              }); 
+              morph = { left:[parseInt($$('.jester:first-child .name').getStyle('left') || '0'), 128 * before.length] }
+              $$('.jester .name').morph(morph);
+            }
           
             var sorted = $$('.jester').sort(function(a, b) {
               ab = [a, b].map(function(e) {
