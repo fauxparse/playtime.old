@@ -27,9 +27,7 @@
             $$('.jester .data').removeClass('active');
             $$('.jester .' + column).addClass('active');
 
-            if (Browser.Platform.ios) { // TODO: iPhone only, not iPad
-
-            } else {
+            if (!Browser.Platform.iphone) {
               before.push(this);
               before.each(function(a, i) {
                 left = a.getStyle('left');

@@ -90,7 +90,7 @@
     }
   
     window.addEvent('domready', function() {
-      if (!Browser.Platform.ios) { // TODO: turn on for iPad
+      if (!Browser.Platform.iphone) {
         $$('.last-show-played-summary, .last-show-mced-summary, .current-percentage-summary').addEvent('click', function() {
           $$('.explain.' + this.get('class').replace(/-summary.*$/, ''))[0].setStyles({ display:'block' }).getSiblings('.explain').setStyles({ display:'none' });
           return false;
