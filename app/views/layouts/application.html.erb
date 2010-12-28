@@ -2,7 +2,7 @@
 <html>
 <head>
   <title><%= [ yield(:title), "Playtime" ].reject(&:blank?).join(" | ") %></title>
-  <%= stylesheet_link_tag :all %>
+  <%= stylesheet_link_tag "styles" %>
   <%= csrf_meta_tag %>
 </head>
 <body>

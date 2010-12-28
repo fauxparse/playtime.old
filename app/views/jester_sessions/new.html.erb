@@ -1,14 +1,22 @@
-<h1>Log in</h1>
-
 <%= form_for @jester_session, :as => :jester_session, :url => login_path do |form| %>
-  <%= render "shared/errors", :target => form.object %>
-  <%= form.label :email %><br />
-  <%= form.text_field :email %><br />
-  <br />
-  <%= form.label :password %><br />
-  <%= form.password_field :password %><br />
-  <br />
-  <%= form.check_box :remember_me %><%= form.label :remember_me %><br />
-  <br />
-  <%= form.submit "Login" %>
+  <%= form.hidden_field :remember_me, :value => 1 %>
+  <% if form.object.errors.empty? %>
+    <h1>Log in to get started…</h1>
+  <% else %>
+    <h1>Whoops! Please try again…</h1>
+  <% end %>
+
+  <ul class="form">
+    <li class="text">
+      <%= form.label :email %>
+      <%= form.text_field :email, :type => :email, :placeholder => "name@example.com" %>
+    </li>
+    <li class="text">
+      <%= form.label :password %>
+      <%= form.password_field :password %>
+    </li>
+    <li class="submit">
+      <%= form.submit "Log in", :class => :button %>
+    </li>
+  </ul>
 <% end %>

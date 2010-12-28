@@ -1,0 +1,107 @@
+/* Login form {{{ */
+
+body {
+  margin: 0px;
+  padding: 0px;
+  background: #111 url(/images/noise.png) repeat 0px 0px;
+  color: #eee;
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+}
+
+body, td, input, select, textarea {
+  font: 14px/1.5em "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+body, td {
+  letter-spacing: -0.1em;
+}
+
+.container {
+  text-align: left;
+  width: 768px;
+  margin: 0px auto;
+  padding: 360px 0px 40px;
+  background: url(/images/title.png) no-repeat center top;
+}
+
+h1 {
+  font-size: 150%;
+  margin: 0px 0px 8px;
+  padding: 0px;
+}
+
+ul.form {
+  margin: 0px;
+  padding: 0px;
+}
+
+ul.form li {
+  display: block;
+  list-style: none;
+  margin: 0px 8px 1em 0px;
+  padding: 0px;
+  float: left;
+  position: relative;
+}
+
+ul.form li label {
+  display: block;
+  text-transform: uppercase;
+  position: absolute;
+  bottom: -2em;
+  color: #444;
+}
+
+ul.form li.text input {
+  display: block;
+  font-size: 150%;
+  font-weight: normal;
+  border: none;
+  padding: 0px 4px;
+  width: 296px;
+  outline: none;
+  -webkit-border-radius: 4px;
+  -webkit-box-shadow: black 0px 1px 1px, black 0px -1px 1px, white 0px 1px 2px, inset rgba(0, 0, 0, 0.25) 0px 1px 2px;
+}
+
+ul.form li.text input:focus {
+  -webkit-box-shadow: black 0px 1px 1px, black 0px -1px 1px, white 0px 1px 2px, #ec008c 0px 0px 16px, inset rgba(0, 0, 0, 0.25) 0px 1px 2px;
+}
+
+ul.form li.submit {
+  margin-right: none;
+}
+
+ul.form li.submit .button {
+  padding: 2px 0px 3px;
+  width: 128px;
+}
+
+/* }}} */
+
+/* Buttons {{{ */
+
+.button, .button:visited {
+	background: #ec008c url(/images/alert-overlay.png) repeat-x; 
+	display: inline-block; 
+	padding: 5px 12px 6px; 
+	color: #fff; 
+	text-decoration: none;
+	border: none;
+	text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+	border-bottom: 1px solid rgba(0,0,0,0.25);
+	position: relative;
+	cursor: pointer;
+	font-weight: bold;
+	font-size: 125%;
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px;
+	-moz-box-shadow: rgba(0,0,0,0.5) 0 1px 3px;
+	-webkit-box-shadow: rgba(0,0,0,0.5) 0 1px 3px;
+}
+
+.button:hover { background-color: #c2117a; color: #fff; }
+
+/* }}} */
+

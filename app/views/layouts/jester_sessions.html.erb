@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= [ yield(:title), "Playtime" ].reject(&:blank?).join(" | ") %></title>
+  <%= stylesheet_link_tag "sessions" %>
+  <%= csrf_meta_tag %>
+</head>
+<body>
+  <div class="container">
+    <%= yield %>
+  </div>
+</body>
+</html>
