@@ -63,7 +63,7 @@
 }
 
 #header h1 {
-  font-size: 250%;
+  font-size: 200%;
 }
 
 #header h1 small {
@@ -176,6 +176,59 @@
   clear: both;
   float: none;
   margin: 0px;
+}
+
+/* }}} */
+
+/* Shows {{{ */
+
+.shows .dates h2 {
+  width: 192px;
+}
+
+ul.casting {
+  width: 144px;
+}
+
+.show-cast {
+  position: relative;
+  margin: 0px 0px 16px;
+  padding-bottom: 48px;
+}
+
+.show-cast .button {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  width: 288px;
+  padding: 5px 0px 6px;
+  text-align: center;
+}
+
+.show-cast .mcs,
+.show-cast .players {
+  position: static;
+  float: none;
+  clear: left;
+  border: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+.show-cast .players {
+  margin-top: 8px;
+  border-top: 1px solid #444;
+  padding-top: 4px;
+}
+
+#main .show-cast .mc,
+#main .show-cast .player {
+  float: left;
+  display: block;
+  position: relative;
+  width: 144px;
+  height: 32px;
+  margin: 0px 0px 8px;
 }
 
 /* }}} */

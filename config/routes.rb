@@ -7,7 +7,10 @@ Playtime::Application.routes.draw do
   get "availability(/:date)" => "availability#show", :as => :availability
   put "availability(/:date)" => "availability#update"
   
-  resources :shows
+  get "shows(/:year/:month)" => "shows#index", :as => :shows
+  get "shows/:year/:month/:day" => "shows#show", :as => :show
+  get "shows/:year/:month/:day/edit" => "shows#edit", :as => :edit_show
+  put "shows/:year/:month/:day" => "shows#update"
   
   get "login" => "jester_sessions#new", :as => :login
   post "login" => "jester_sessions#create"

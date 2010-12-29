@@ -5,6 +5,8 @@ class Show < ActiveRecord::Base
   
   has_many :players, :inverse_of => :show, :dependent => :destroy
   has_many :jesters, :through => :players
+  
+  accepts_nested_attributes_for :players
 
   validates_presence_of :date
   
@@ -13,6 +15,10 @@ class Show < ActiveRecord::Base
   scope :as_player, where("players.role = ?", :player)
   scope :as_mc, where("players.role = ?", :mc)
   scope :as_player_or_mc, where("players.role IS NOT NULL")
+  
+  def params
+    [ date.year, date.month, date.day ]
+  end
   
   def self.import(filename)
     shows = {}

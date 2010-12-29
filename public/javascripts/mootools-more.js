@@ -1,6 +1,6 @@
 // MooTools: the javascript framework.
-// Load this file's selection again by visiting: http://mootools.net/more/bb59567dca80cd49c6fa1c1dba472357 
-// Or build this file again with packager using: packager build More/More More/Fx.Sort More/Drag More/Drag.Move More/Sortables More/Tips
+// Load this file's selection again by visiting: http://mootools.net/more/3444a80fe436a0568f1616f9c697b5d0 
+// Or build this file again with packager using: packager build More/More More/Fx.Reveal More/Fx.Sort More/Drag More/Drag.Move More/Sortables More/Tips
 /*
 ---
 
@@ -38,74 +38,73 @@ MooTools.More = {
 /*
 ---
 
-script: Fx.Elements.js
+script: Element.Shortcuts.js
 
-name: Fx.Elements
+name: Element.Shortcuts
 
-description: Effect to change any number of CSS properties of any number of Elements.
+description: Extends the Element native object to include some shortcut methods.
 
 license: MIT-style license
 
 authors:
-  - Valerio Proietti
+  - Aaron Newton
 
 requires:
-  - Core/Fx.CSS
+  - Core/Element.Style
   - /MooTools.More
 
-provides: [Fx.Elements]
+provides: [Element.Shortcuts]
 
 ...
 */
 
-Fx.Elements = new Class({
+Element.implement({
 
-	Extends: Fx.CSS,
-
-	initialize: function(elements, options){
-		this.elements = this.subject = $$(elements);
-		this.parent(options);
+	isDisplayed: function(){
+		return this.getStyle('display') != 'none';
 	},
 
-	compute: function(from, to, delta){
-		var now = {};
-
-		for (var i in from){
-			var iFrom = from[i], iTo = to[i], iNow = now[i] = {};
-			for (var p in iFrom) iNow[p] = this.parent(iFrom[p], iTo[p], delta);
-		}
-
-		return now;
+	isVisible: function(){
+		var w = this.offsetWidth,
+			h = this.offsetHeight;
+		return (w == 0 && h == 0) ? false : (w > 0 && h > 0) ? true : this.style.display != 'none';
 	},
 
-	set: function(now){
-		for (var i in now){
-			if (!this.elements[i]) continue;
-
-			var iNow = now[i];
-			for (var p in iNow) this.render(this.elements[i], p, iNow[p], this.options.unit);
-		}
-
-		return this;
+	toggle: function(){
+		return this[this.isDisplayed() ? 'hide' : 'show']();
 	},
 
-	start: function(obj){
-		if (!this.check(obj)) return this;
-		var from = {}, to = {};
+	hide: function(){
+		var d;
+		try {
+			//IE fails here if the element is not in the dom
+			d = this.getStyle('display');
+		} catch(e){}
+		if (d == 'none') return this;
+		return this.store('element:_originalDisplay', d || '').setStyle('display', 'none');
+	},
 
-		for (var i in obj){
-			if (!this.elements[i]) continue;
+	show: function(display){
+		if (!display && this.isDisplayed()) return this;
+		display = display || this.retrieve('element:_originalDisplay') || 'block';
+		return this.setStyle('display', (display == 'none') ? 'block' : display);
+	},
 
-			var iProps = obj[i], iFrom = from[i] = {}, iTo = to[i] = {};
+	swapClass: function(remove, add){
+		return this.removeClass(remove).addClass(add);
+	}
 
-			for (var p in iProps){
-				var parsed = this.prepare(this.elements[i], p, iProps[p]);
-				iFrom[p] = parsed.from;
-				iTo[p] = parsed.to;
-			}
+});
+
+Document.implement({
+
+	clearSelection: function(){
+		if (document.selection && document.selection.empty){
+			document.selection.empty();
+		} else if (window.getSelection){
+			var selection = window.getSelection();
+			if (selection && selection.removeAllRanges) selection.removeAllRanges();
 		}
-
-		return this.parent(from, to);
 	}
 
 });
@@ -277,6 +276,312 @@ Element.implement({
 });
 
 })();
+
+
+/*
+---
+
+script: Fx.Reveal.js
+
+name: Fx.Reveal
+
+description: Defines Fx.Reveal, a class that shows and hides elements with a transition.
+
+license: MIT-style license
+
+authors:
+  - Aaron Newton
+
+requires:
+  - Core/Fx.Morph
+  - /Element.Shortcuts
+  - /Element.Measure
+
+provides: [Fx.Reveal]
+
+...
+*/
+
+Fx.Reveal = new Class({
+
+	Extends: Fx.Morph,
+
+	options: {/*
+		onShow: function(thisElement){},
+		onHide: function(thisElement){},
+		onComplete: function(thisElement){},
+		heightOverride: null,
+		widthOverride: null,*/
+		link: 'cancel',
+		styles: ['padding', 'border', 'margin'],
+		transitionOpacity: !Browser.ie6,
+		mode: 'vertical',
+		display: function(){
+			return this.element.get('tag') != 'tr' ? 'block' : 'table-row';
+		},
+		opacity: 1,
+		hideInputs: Browser.ie ? 'select, input, textarea, object, embed' : null
+	},
+
+	dissolve: function(){
+		if (!this.hiding && !this.showing){
+			if (this.element.getStyle('display') != 'none'){
+				this.hiding = true;
+				this.showing = false;
+				this.hidden = true;
+				this.cssText = this.element.style.cssText;
+
+				var startStyles = this.element.getComputedSize({
+					styles: this.options.styles,
+					mode: this.options.mode
+				});
+				if (this.options.transitionOpacity) startStyles.opacity = this.options.opacity;
+
+				var zero = {};
+				Object.each(startStyles, function(style, name){
+					zero[name] = [style, 0];
+				});
+
+				this.element.setStyles({
+					display: Function.from(this.options.display).call(this),
+					overflow: 'hidden'
+				});
+
+				var hideThese = this.options.hideInputs ? this.element.getElements(this.options.hideInputs) : null;
+				if (hideThese) hideThese.setStyle('visibility', 'hidden');
+
+				this.$chain.unshift(function(){
+					if (this.hidden){
+						this.hiding = false;
+						this.element.style.cssText = this.cssText;
+						this.element.setStyle('display', 'none');
+						if (hideThese) hideThese.setStyle('visibility', 'visible');
+					}
+					this.fireEvent('hide', this.element);
+					this.callChain();
+				}.bind(this));
+
+				this.start(zero);
+			} else {
+				this.callChain.delay(10, this);
+				this.fireEvent('complete', this.element);
+				this.fireEvent('hide', this.element);
+			}
+		} else if (this.options.link == 'chain'){
+			this.chain(this.dissolve.bind(this));
+		} else if (this.options.link == 'cancel' && !this.hiding){
+			this.cancel();
+			this.dissolve();
+		}
+		return this;
+	},
+
+	reveal: function(){
+		if (!this.showing && !this.hiding){
+			if (this.element.getStyle('display') == 'none'){
+				this.hiding = false;
+				this.showing = true;
+				this.hidden = false;
+				this.cssText = this.element.style.cssText;
+
+				var startStyles;
+				this.element.measure(function(){
+					startStyles = this.element.getComputedSize({
+						styles: this.options.styles,
+						mode: this.options.mode
+					});
+				}.bind(this));
+				if (this.options.heightOverride != null) startStyles.height = this.options.heightOverride.toInt();
+				if (this.options.widthOverride != null) startStyles.width = this.options.widthOverride.toInt();
+				if (this.options.transitionOpacity){
+					this.element.setStyle('opacity', 0);
+					startStyles.opacity = this.options.opacity;
+				}
+
+				var zero = {
+					height: 0,
+					display: Function.from(this.options.display).call(this)
+				};
+				Object.each(startStyles, function(style, name){
+					zero[name] = 0;
+				});
+				zero.overflow = 'hidden';
+
+				this.element.setStyles(zero);
+
+				var hideThese = this.options.hideInputs ? this.element.getElements(this.options.hideInputs) : null;
+				if (hideThese) hideThese.setStyle('visibility', 'hidden');
+
+				this.$chain.unshift(function(){
+					this.element.style.cssText = this.cssText;
+					this.element.setStyle('display', Function.from(this.options.display).call(this));
+					if (!this.hidden) this.showing = false;
+					if (hideThese) hideThese.setStyle('visibility', 'visible');
+					this.callChain();
+					this.fireEvent('show', this.element);
+				}.bind(this));
+
+				this.start(startStyles);
+			} else {
+				this.callChain();
+				this.fireEvent('complete', this.element);
+				this.fireEvent('show', this.element);
+			}
+		} else if (this.options.link == 'chain'){
+			this.chain(this.reveal.bind(this));
+		} else if (this.options.link == 'cancel' && !this.showing){
+			this.cancel();
+			this.reveal();
+		}
+		return this;
+	},
+
+	toggle: function(){
+		if (this.element.getStyle('display') == 'none'){
+			this.reveal();
+		} else {
+			this.dissolve();
+		}
+		return this;
+	},
+
+	cancel: function(){
+		this.parent.apply(this, arguments);
+		this.element.style.cssText = this.cssText;
+		this.hiding = false;
+		this.showing = false;
+		return this;
+	}
+
+});
+
+Element.Properties.reveal = {
+
+	set: function(options){
+		this.get('reveal').cancel().setOptions(options);
+		return this;
+	},
+
+	get: function(){
+		var reveal = this.retrieve('reveal');
+		if (!reveal){
+			reveal = new Fx.Reveal(this);
+			this.store('reveal', reveal);
+		}
+		return reveal;
+	}
+
+};
+
+Element.Properties.dissolve = Element.Properties.reveal;
+
+Element.implement({
+
+	reveal: function(options){
+		this.get('reveal').setOptions(options).reveal();
+		return this;
+	},
+
+	dissolve: function(options){
+		this.get('reveal').setOptions(options).dissolve();
+		return this;
+	},
+
+	nix: function(options){
+		var params = Array.link(arguments, {destroy: Type.isBoolean, options: Type.isObject});
+		this.get('reveal').setOptions(options).dissolve().chain(function(){
+			this[params.destroy ? 'destroy' : 'dispose']();
+		}.bind(this));
+		return this;
+	},
+
+	wink: function(){
+		var params = Array.link(arguments, {duration: Type.isNumber, options: Type.isObject});
+		var reveal = this.get('reveal').setOptions(params.options);
+		reveal.reveal().chain(function(){
+			(function(){
+				reveal.dissolve();
+			}).delay(params.duration || 2000);
+		});
+	}
+
+});
+
+
+/*
+---
+
+script: Fx.Elements.js
+
+name: Fx.Elements
+
+description: Effect to change any number of CSS properties of any number of Elements.
+
+license: MIT-style license
+
+authors:
+  - Valerio Proietti
+
+requires:
+  - Core/Fx.CSS
+  - /MooTools.More
+
+provides: [Fx.Elements]
+
+...
+*/
+
+Fx.Elements = new Class({
+
+	Extends: Fx.CSS,
+
+	initialize: function(elements, options){
+		this.elements = this.subject = $$(elements);
+		this.parent(options);
+	},
+
+	compute: function(from, to, delta){
+		var now = {};
+
+		for (var i in from){
+			var iFrom = from[i], iTo = to[i], iNow = now[i] = {};
+			for (var p in iFrom) iNow[p] = this.parent(iFrom[p], iTo[p], delta);
+		}
+
+		return now;
+	},
+
+	set: function(now){
+		for (var i in now){
+			if (!this.elements[i]) continue;
+
+			var iNow = now[i];
+			for (var p in iNow) this.render(this.elements[i], p, iNow[p], this.options.unit);
+		}
+
+		return this;
+	},
+
+	start: function(obj){
+		if (!this.check(obj)) return this;
+		var from = {}, to = {};
+
+		for (var i in obj){
+			if (!this.elements[i]) continue;
+
+			var iProps = obj[i], iFrom = from[i] = {}, iTo = to[i] = {};
+
+			for (var p in iProps){
+				var parsed = this.prepare(this.elements[i], p, iProps[p]);
+				iFrom[p] = parsed.from;
+				iTo[p] = parsed.to;
+			}
+		}
+
+		return this.parent(from, to);
+	}
+
+});
 
 
 /*

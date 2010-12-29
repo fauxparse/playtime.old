@@ -1,0 +1,66 @@
+<% content_for :title, @show.date.to_s(:long) %>
+
+<% content_for :header do %>
+  <h1><%= @show.date.to_s(:long) %></h1>
+<% end %>
+
+<% form_for @show, :as => :show, :url => show_path(@show.date.year, @show.date.month, @show.date.day), :method => :put do |form| %>
+  <div class="cast-editor container_12">
+    <div class="grid_6 alpha cast">
+      <h2>MC</h2>
+      <ul class="casting" id="mc-cast">
+        <%= render :partial => "jester", :collection => @show.players.select(&:mcing?).sort_by(&:to_s) %>
+      </ul>
+      <h2>Cast</h2>
+      <ul class="casting" id="player-cast">
+        <%= render :partial => "jester", :collection => @show.players.select(&:playing?).sort_by(&:to_s) %>
+      </ul>
+      <%= submit_tag "Save this cast", :class => "save button" %>
+    </div>
+    
+    <div class="grid_6 alpha available">
+      <h2>Available</h2>
+      <ul class="casting" id="available-cast">
+        <%= render :partial => "jester", :collection => @show.players.reject(&:playing_or_mcing?).sort_by(&:to_s) %>
+      </ul>
+    </div>
+  </div>
+<% end %>
+
+<% content_for :scripts do %>
+  <script>
+    var sorting;
+  
+    window.addEvent('domready', function() {
+      if (Browser.Platform.ios) {
+        $$('.casting li').each(function(jester) {
+          jester.draggable = new webkit_draggable(jester.get('id'), {
+            revert: true,
+            scroll: true
+          });
+        });
+        
+        $$('ul.casting').each(function(cast_list) {
+          webkit_drop.add(cast_list.get('id'), {
+            onDrop: function(jester) {
+              cast_list.grab(jester);
+              jester.setStyles({
+                position: 'relative',
+                left: '0px',
+                top: '0px'
+              });
+            }
+          });
+        });
+      } else {
+        sorting = new Sortables($$('ul.casting'), {
+        	clone: true,
+        	opacity: 0.6,
+        	onComplete: function(element){
+            element.getElement('.role').set('value', element.getParent().get('id').replace(/(available)?-cast$/, ''));
+        	}
+        });
+      }
+    });
+  </script>
+<% end %>

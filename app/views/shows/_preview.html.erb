@@ -1,0 +1,5 @@
+<div class="show-preview" style="display: none">
+  <h3><%= link_to show.date.to_s(:long), show_path(show.date.year, show.date.month, show.date.day) %> <%= show.players.select(&:mcing?).to_sentence %></h3>
+  <p><%= show.players.select(&:playing?).map(&:to_s).to_sentence %></p>
+  <%= link_to "▶", show_path(show.date.year, show.date.month, show.date.day), :class => :go %>
+</div>

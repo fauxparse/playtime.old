@@ -5,6 +5,8 @@ class Player < ActiveRecord::Base
   scope :playing, where(:role => :player)
   scope :mcing, where(:role => :mc)
   scope :playing_or_mcing, where(:role => [ :player, :mc ])
+  
+  delegate :to_s, :image, :name, :to => :jester
 
   def role
     super.try :to_sym

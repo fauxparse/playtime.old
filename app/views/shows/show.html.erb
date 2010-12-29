@@ -1,0 +1,18 @@
+<% content_for :title, @show.date.to_s(:long) %>
+
+<% content_for :header do %>
+  <h1><%= @show.date.to_s(:long) %></h1>
+<% end %>
+
+<% content_tag :div, :class => "show show-cast container_12" do %>
+  <div class="grid_3 mcs alpha">
+    <h2>MC</h2>
+    <%= render :partial => "shows/player", :collection => @show.players.select(&:mcing?) %>
+    <%= link_to "Edit cast", edit_show_path(*@show.params), :class => "edit button" %>
+  </div>
+  <div class="grid_9 players omega">
+    <h2>Players</h2>
+    <%= render :partial => "shows/player", :collection => @show.players.select(&:playing?) %>
+  </div>
+  <%= clear_floats %>
+<% end %>

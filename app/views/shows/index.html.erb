@@ -4,4 +4,49 @@
   <h1>Shows</h1>
 <% end %>
 
-<p>Find me in app/views/shows/index.html.erb</p>
+<div class="shows">
+  <div class="dates grid_12 alpha">
+    <h2><%= @month.strftime("%b %Y") %></h2>
+    <%= link_to "◀", shows_path(@last_month.year, @last_month.month), :class => "back" %>
+    <%= link_to "▶", shows_path(@next_month.year, @next_month.month), :class => "next" %>
+  </div>
+  
+  <div class="calendar">
+    <% ((@month - @month.wday)...(@next_month + 7 - @next_month.wday)).to_a.in_groups_of(7, false) do |week| %>
+      <div class="week">
+        <% week.each do |day| %>
+          <%= content_tag :div, :class => "day day-#{day.wday}#{' filler' unless (@month...@next_month).include?(day)}" do %>
+            <% if @shows.key?(day) %>
+              <%= link_to day.day, show_path(day.year, day.month, day.day), :class => :show %>
+              <%= render "preview", :show => @shows[day] %>
+            <% else %>
+              <%= link_to day.day, show_path(day.year, day.month, day.day), :class => :new %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<% content_for :scripts do %>
+  <script>
+    window.addEvent('domready', function() {
+      $$('.calendar a.show').addEvent('click', function() {
+        if (!this.hasClass('active')) {
+          active = this.getParent('.calendar').getElement('.active');
+          if (active) {
+            active.removeClass('active');
+            active.getNext('.show-preview').dissolve();
+          }
+          this.getNext('.show-preview').reveal();
+          this.addClass('active');
+        } else {
+          this.getNext('.show-preview').dissolve();
+          this.removeClass('active');
+        }
+        return false;
+      });
+    });
+  </script>
+<% end %>

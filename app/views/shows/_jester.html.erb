@@ -1,0 +1,7 @@
+<%= content_tag :li, :class => :jester, :id => dom_id(jester) do %>
+  <%= portrait jester, 32 %>
+  <%= content_tag :span, jester %>
+  <%= hidden_field_tag "show[players_attributes][#{jester.id}][id]", jester.id %>
+  <%= hidden_field_tag "show[players_attributes][#{jester.id}][role]", jester.role, :class => :role %>
+  <%= hidden_field_tag "show[players_attributes][#{jester.id}][jester_id]", jester.jester_id %>
+<% end %>
