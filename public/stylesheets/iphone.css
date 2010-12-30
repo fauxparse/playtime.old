@@ -70,6 +70,11 @@
   display: none;
 }
 
+#header .grid_12 {
+  width: 304px;
+  position: relative;
+}
+
 /* }}} */
 
 /* Main {{{ */

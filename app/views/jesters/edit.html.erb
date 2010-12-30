@@ -1,7 +1,13 @@
-<h1>Edit Jester</h1>
+<% content_for :title, "Edit #{@jester}" %>
+
+<% content_for :header do %>
+  <div class="grid_12 alpha omega">
+    <h1><%= portrait @jester, 48 %> <%= @jester %> <%= content_tag :small, "← that’s you!" if current_jester == @jester %></h1>
+  </div>
+<% end %>
 
 <%= form_for @jester, :as => :jester, :url => jester_path(@jester) do |f| %>
   <%= render :partial => "form", :object => f %>
-  <%= f.submit "Update" %>
+  <%= f.submit "Save", :class => "save button" %>
 <% end %>
 

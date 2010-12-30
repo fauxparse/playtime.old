@@ -469,7 +469,7 @@ a { color: #ec008c; text-decoration: none; }
 #logged-in {
   position: absolute;
   top: 0px;
-  right: 0px;
+  right: 8px;
   z-index: 10;
   padding: 0px;
   font-weight: bold;
@@ -493,6 +493,17 @@ a { color: #ec008c; text-decoration: none; }
 #main {
   padding: 0.75em 0px;
   text-shadow: black 0px 1px 1px;
+  position: relative;
+}
+
+/* }}} */
+
+/* Jester profile {{{ */
+
+#header .edit {
+  position: absolute;
+  right: 0px;
+  bottom: 16px;
 }
 
 dl {
@@ -837,7 +848,7 @@ ul.casting li img {
 
 .cast-editor .button,
 .cast-editor .button:hover {
-  background: #8dc63f;
+  background-color: #8dc63f;
   margin: 0px;
   width: 144px;
 }
@@ -910,12 +921,12 @@ ul.casting li img {
   float: left;
   width: 5em;
   padding: 5px 0px 6px;
-  background: #8dc63f;
+  background-color: #8dc63f;
 }
 
 #availability .wipe {
   margin-right: 4px;
-  background: #ed1c24;
+  background-color: #ed1c24;
 }
 
 #main .availability {
@@ -1060,3 +1071,60 @@ ul.casting li img {
 
 /* }}} */
 
+/* Forms {{{ */
+
+ol.form {
+  margin: 0px;
+  padding: 0px;
+}
+
+ol.form li {
+  margin: 0px -8px 4px 0px;
+  padding: 0px;
+  display: block;
+  list-style: none;
+  clear: left;
+}
+
+ol.form li label {
+  display: block;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: normal;
+}
+
+ol.form li input.text {
+  display: block;
+  font-size: 150%;
+  font-weight: normal;
+  border: none;
+  padding: 0px 4px;
+  width: 294px;
+  outline: none;
+  border: 1px solid #111;
+  -webkit-appearance: none;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-box-shadow: #444 0px 1px 0px, inset rgba(0, 0, 0, 0.25) 0px 1px 2px;
+  -moz-box-shadow: #444 0px 1px 0px, inset rgba(0, 0, 0, 0.25) 0px 1px 2px;
+}
+
+ol.form li .split {
+  float: left;
+  width: 148px;
+  margin-right: 8px;
+  padding-bottom: 4px;
+}
+
+ol.form li .split input.text {
+  width: 138px;
+}
+
+form.jester_edit .button,
+form.jester_new .button {
+  position: absolute;
+  right: 8px;
+  top: -56px;
+}
+
+/* }}} */

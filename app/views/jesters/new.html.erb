@@ -1,7 +1,12 @@
-<h1>New Jester</h1>
+<% content_for :title, "New Jester" %>
+
+<% content_for :header do %>
+  <div class="grid_12 alpha omega">
+    <h1>New Jester</h1>
+  </div>
+<% end %>
 
 <%= form_for @jester, :as => :jester, :url => jesters_path do |f| %>
-  <%= f.error_messages %>
   <%= render :partial => "form", :object => f %>
-  <%= f.submit "Save" %>
+  <%= f.submit "Save", :class => "save button" %>
 <% end %>

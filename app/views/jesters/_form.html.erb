@@ -1,18 +1,37 @@
 <%= render "shared/errors", :target => form.object %>
-<%= form.label :first_name %><br />
-<%= form.text_field :first_name %><br />
-<br />
-<%= form.label :last_name %><br />
-<%= form.text_field :last_name %><br />
-<br />
-<%= form.label :name %><br />
-<%= form.text_field :name %><br />
-<br />
-<%= form.label :email %><br />
-<%= form.text_field :email %><br />
-<br />
-<%= form.label :password, form.object.new_record? ? nil : "Change password" %><br />
-<%= form.password_field :password %><br />
-<br />
-<%= form.label :password_confirmation %><br />
-<%= form.password_field :password_confirmation %><br />
+
+<ol class="form">
+  <li class="name">
+    <div class="split">
+      <%= form.label :first_name %>
+      <%= form.text_field :first_name, :class => :text %>
+    </div>
+    <div class="split">
+      <%= form.label :last_name %>
+      <%= form.text_field :last_name, :class => :text %>
+    </div>
+  </li>
+  <li>
+    <%= form.label :name, "Nickname" %>
+    <%= form.text_field :name, :class => :text %>
+  </li>
+  <li>
+    <%= form.label :email %>
+    <%= form.text_field :email, :class => :text %>
+  </li>
+  <li class="password">
+    <div class="split">
+      <%= form.label :password, form.object.new_record? ? nil : "Change password" %>
+      <%= form.password_field :password, :placeholder => "••••••••", :class => :text %>
+    </div>
+    <div class="split">
+      <%= form.label :password_confirmation, "Confirm" %>
+      <%= form.password_field :password_confirmation, :placeholder => "••••••••", :class => :text %>
+    </div>
+  </li>
+</ol>
+<%= clear_floats %>
+
+
+
+

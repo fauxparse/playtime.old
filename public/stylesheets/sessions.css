@@ -67,7 +67,7 @@ ul.form li.text input {
 }
 
 ul.form li.text input:focus {
-  -webkit-box-shadow: #444 0px 1px 0px, inset rgba(0, 0, 0, 0.25) 0px 1px 2px, #ec008c 0px 0px 16px;
+  -webkit-box-shadow: #ec008c 0px 0px 16px, inset rgba(0, 0, 0, 0.25) 0px 1px 2px;
 }
 
 ul.form li.submit {

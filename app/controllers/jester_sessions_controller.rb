@@ -1,4 +1,5 @@
 class JesterSessionsController < ApplicationController
+  skip_authorization_check
   skip_before_filter :require_login
   
   def new

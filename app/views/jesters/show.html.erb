@@ -3,6 +3,7 @@
 <% content_for :header do %>
   <div class="grid_12 alpha omega">
     <h1><%= portrait @jester, 48 %> <%= @jester %> <%= content_tag :small, "← that’s you!" if current_jester == @jester %></h1>
+    <%= link_to "Edit", edit_jester_path(@jester), :class => "edit button" if can?(:edit, @jester) %>
   </div>
 <% end %>
 
@@ -10,13 +11,21 @@
   <div class="grid_4 alpha">
     <dl class="last-show-played-summary">
       <dt>Last played</dt>
-      <dd><%= link_to extended_date(@jester.last_played_on), show_path(*@jester.last_played_on.params) %></dd>
+      <% if @jester.last_played %>
+        <dd><%= link_to extended_date(@jester.last_played_on), show_path(*@jester.last_played_on.params) %></dd>
+      <% else %>
+        <dd class="never">(never)</dd>
+      <% end %>
     </dl>
   </div>
   <div class="grid_4">
     <dl class="last-show-mced-summary">
       <dt>Last MCed</dt>
-      <dd><%= link_to extended_date(@jester.last_mced_on), show_path(*@jester.last_mced_on.params) %></dd>
+      <% if @jester.last_mced %>
+        <dd><%= link_to extended_date(@jester.last_mced_on), show_path(*@jester.last_mced_on.params) %></dd>
+      <% else %>
+        <dd class="never">(never)</dd>
+      <% end %>
     </dl>
   </div>
   <div class="grid_4 omega">
