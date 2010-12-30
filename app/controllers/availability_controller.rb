@@ -8,7 +8,7 @@ class AvailabilityController < ApplicationController
     shows.each do |show|
       show.update_attributes(params[:shows][show.date.to_s(:db)] || { :availability => [] })
     end
-    redirect_to availability_path(date)
+    redirect_to availability_path(date.year, date.month, date.day)
   end
 
 protected
@@ -17,8 +17,8 @@ protected
   end
 
   def date
-    @date ||= if params[:date].present?
-      Date.parse params[:date]
+    @date ||= if params[:year].present?
+      Date.civil params[:year].to_i, (params[:month] || 1).to_i, (params[:day] || 1).to_i
     else
       Date.today + 7
     end

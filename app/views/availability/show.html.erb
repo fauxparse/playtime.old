@@ -5,11 +5,11 @@
 <% end %>
 
 <div id="availability" class="container_12">
-  <%= form_tag availability_path(@shows.first.date.to_s(:db)), :method => :put do %>
+  <%= form_tag availability_path(*@shows.first.params), :method => :put do %>
     <div class="dates grid_9 alpha">
       <h2><%= weekend @dates %></h2>
-      <%= link_to "◀", availability_path(@dates.first - 7), :class => "back" %>
-      <%= link_to "▶", availability_path(@dates.first + 7), :class => "next" %>
+      <%= link_to "◀", availability_path(*(@dates.first - 7).params), :class => "back" %>
+      <%= link_to "▶", availability_path(*(@dates.first + 7).params), :class => "next" %>
     </div>
     <div class="buttons grid_3 omega">
       <%= button_to_function "Clear", "clearAvailability()", :class => "wipe button" %>

@@ -4,8 +4,8 @@ Playtime::Application.routes.draw do
     resources :data, :singular => :point
   end
 
-  get "availability(/:date)" => "availability#show", :as => :availability
-  put "availability(/:date)" => "availability#update"
+  get "availability(/:year/:month/:day)" => "availability#show", :as => :availability
+  put "availability(/:year/:month/:day)" => "availability#update"
   
   get "shows(/:year/:month)" => "shows#index", :as => :shows
   get "shows/:year/:month/:day" => "shows#show", :as => :show

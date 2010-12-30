@@ -7,20 +7,20 @@ class ShowsController < ApplicationController
   end
 
   def show
-    @show = Show.find_by_date(date, :include => { :players => :jester }) or
+    @show = Show.find_by_date(date, :include => { :players => :jester }) ||
             Show.new(:date => date)
   end
   
   def edit
     unless @show = Show.find_by_date(date, :include => { :players => :jester })
-      redirect_to availability_path(@show.date)
+      redirect_to availability_path(*@show.params)
     end
   end
   
   def update
     @show = Show.find_by_date(date, :include => { :players => :jester })
     @show.update_attributes params[:show]
-    redirect_to show_path(@show.date.year, @show.date.month, @show.date.day)
+    redirect_to show_path(*@show.params)
   end
 
 protected

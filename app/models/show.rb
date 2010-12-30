@@ -16,9 +16,7 @@ class Show < ActiveRecord::Base
   scope :as_mc, where("players.role = ?", :mc)
   scope :as_player_or_mc, where("players.role IS NOT NULL")
   
-  def params
-    [ date.year, date.month, date.day ]
-  end
+  delegate :params, :to => :date
   
   def self.import(filename)
     shows = {}
