@@ -1,10 +1,11 @@
 class JestersController < ApplicationController
+  before_filter :load_jesters, :only => :index
+  load_and_authorize_resource
+
   def index
-    @jesters = Jester.active.all(:include => { :availability => :show }).to_a
   end
   
   def new
-    @jester = Jester.new
   end
   
   def create
@@ -34,5 +35,10 @@ class JestersController < ApplicationController
       render :action => :edit
     end
   end
-
+  
+protected
+  def load_jesters
+    @jesters = Jester.active.all(:include => { :availability => :show }).to_a
+  end
+  
 end

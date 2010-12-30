@@ -59,14 +59,15 @@ ul.form li.text input {
   font-weight: normal;
   border: none;
   padding: 0px 4px;
-  width: 296px;
+  width: 294px;
   outline: none;
+  border: 1px solid #111;
   -webkit-border-radius: 4px;
-  -webkit-box-shadow: black 0px 1px 1px, black 0px -1px 1px, white 0px 1px 2px, inset rgba(0, 0, 0, 0.25) 0px 1px 2px;
+  -webkit-box-shadow: #444 0px 1px 0px, inset rgba(0, 0, 0, 0.25) 0px 1px 2px;
 }
 
 ul.form li.text input:focus {
-  -webkit-box-shadow: black 0px 1px 1px, black 0px -1px 1px, white 0px 1px 2px, #ec008c 0px 0px 16px, inset rgba(0, 0, 0, 0.25) 0px 1px 2px;
+  -webkit-box-shadow: #444 0px 1px 0px, inset rgba(0, 0, 0, 0.25) 0px 1px 2px, #ec008c 0px 0px 16px;
 }
 
 ul.form li.submit {

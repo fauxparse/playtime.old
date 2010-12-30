@@ -3,7 +3,7 @@ require "csv"
 class Show < ActiveRecord::Base
   has_friendly_id :date_slug, :use_slug => true
   
-  has_many :players, :inverse_of => :show, :dependent => :destroy
+  has_many :players, :inverse_of => :show, :dependent => :destroy, :include => :jester
   has_many :jesters, :through => :players
   
   accepts_nested_attributes_for :players
@@ -52,6 +52,10 @@ class Show < ActiveRecord::Base
   def availability=(ids)
     Rails.logger.info "Availability => #{ids.inspect}".green
     self.jester_ids = Array(ids).map(&:to_i)
+  end
+  
+  def mcs
+    players.select(&:mcing?).map(&:jester)
   end
   
 end

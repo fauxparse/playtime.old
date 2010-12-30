@@ -514,6 +514,8 @@ dd {
   font-weight: bold;
 }
 
+dd a { color: #eee; }
+
 dd small {
   display: block;
   font-size: 66.66%;

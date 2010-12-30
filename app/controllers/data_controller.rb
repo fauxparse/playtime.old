@@ -1,5 +1,6 @@
 class DataController < ApplicationController
   def index
+    authorize! :read, jester
     @data = jester.availability.includes(:show).order("shows.date").all
     respond_to do |format|
       format.json do

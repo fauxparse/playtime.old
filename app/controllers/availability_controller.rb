@@ -1,11 +1,13 @@
 class AvailabilityController < ApplicationController
   def show
+    authorize! :read, Show
     shows
   end
   
   def update
     params[:shows] ||= {}
     shows.each do |show|
+      authorize! :update, show
       show.update_attributes(params[:shows][show.date.to_s(:db)] || { :availability => [] })
     end
     redirect_to availability_path(date.year, date.month, date.day)

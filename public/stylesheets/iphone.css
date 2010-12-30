@@ -193,6 +193,9 @@ ul.casting {
 .show-cast {
   position: relative;
   margin: 0px 0px 16px;
+}
+
+.show-cast.editable {
   padding-bottom: 48px;
 }
 
@@ -250,6 +253,35 @@ ul.casting {
 
 .button {
   -webkit-appearance: none;
+}
+
+/* }}} */
+
+/* Login {{{ */
+
+.login {
+  width: auto;
+  padding: 160px 8px 0px;
+  background-image: url(/images/login-iphone.png);
+}
+
+.login .text input {
+  -webkit-appearance: none;
+}
+
+.login ul.form li {
+  margin-bottom: 8px;
+}
+
+.login ul.form li label {
+  position: static;
+  display: block;
+  
+}
+
+.login ul.form li.submit .button {
+  width: 304px;
+  padding: 6px 0px 5px;
 }
 
 /* }}} */

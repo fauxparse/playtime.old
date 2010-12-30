@@ -40,6 +40,7 @@ GEM
       activesupport
     babosa (0.2.0)
     builder (2.1.2)
+    cancan (1.4.1)
     colored (1.2)
     configuration (1.1.0)
     erubis (2.6.6)
@@ -97,6 +98,7 @@ PLATFORMS
 
 DEPENDENCIES
   authlogic
+  cancan
   colored
   friendly_id
   heroku

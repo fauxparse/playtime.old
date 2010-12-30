@@ -1,7 +1,14 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  check_authorization
 
   before_filter :require_login
+
+  rescue_from CanCan::AccessDenied do |exception|
+    # TODO: show flash messages
+    flash[:alert] = exception.message
+    redirect_to root_url
+  end
 
 protected
   def current_session
@@ -37,6 +44,10 @@ protected
   def redirect_back_or_default(default)
     redirect_to(session[:return_to] || default)
     session[:return_to] = nil
+  end
+  
+  def current_ability
+    @current_ability ||= Ability.new(current_jester)
   end
   
 end

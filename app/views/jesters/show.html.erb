@@ -10,13 +10,13 @@
   <div class="grid_4 alpha">
     <dl class="last-show-played-summary">
       <dt>Last played</dt>
-      <dd><%= extended_date @jester.last_played_on %></dd>
+      <dd><%= link_to extended_date(@jester.last_played_on), show_path(*@jester.last_played_on.params) %></dd>
     </dl>
   </div>
   <div class="grid_4">
     <dl class="last-show-mced-summary">
       <dt>Last MCed</dt>
-      <dd><%= extended_date @jester.last_mced_on %></dd>
+      <dd><%= link_to extended_date(@jester.last_mced_on), show_path(*@jester.last_mced_on.params) %></dd>
     </dl>
   </div>
   <div class="grid_4 omega">

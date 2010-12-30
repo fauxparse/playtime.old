@@ -3,11 +3,30 @@
 <head>
   <title><%= [ yield(:title), "Playtime" ].reject(&:blank?).join(" | ") %></title>
   <%= stylesheet_link_tag "sessions" %>
+  <!--[if !IE]>-->
+  <%= stylesheet_link_tag "iphone", :media => "only screen and (max-device-width: 480px)" %>
+  <!--<![endif]-->
   <%= csrf_meta_tag %>
+  <meta name="viewport" content="height=device-height,width=device-width,initial-scale=1,user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 </head>
 <body>
-  <div class="container">
+  <div class="login container">
     <%= yield %>
   </div>
+  <%= javascript_include_tag "mootools.js" %>
+  <script>
+    if (Browser.Platform.ios) {
+      if (hw = /(ip(?:ad|od|hone))/.exec(navigator.userAgent.toLowerCase())) {
+        Browser.Platform.hardware = hw[1];
+        Browser.Platform[Browser.Platform.hardware] = true;
+      }
+
+      window.addEventListener('load', function(){
+        setTimeout(scrollTo, 0, 0, 1);
+      }, false);
+    }
+  </script>
 </body>
 </html>

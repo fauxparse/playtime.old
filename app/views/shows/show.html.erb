@@ -4,11 +4,11 @@
   <h1><%= @show.date.to_s(:long) %></h1>
 <% end %>
 
-<% content_tag :div, :class => "show show-cast container_12" do %>
+<% content_tag :div, :class => "show show-cast container_12#{' editable' if can? :edit, @show}" do %>
   <div class="grid_3 mcs alpha">
     <h2>MC</h2>
     <%= render :partial => "shows/player", :collection => @show.players.select(&:mcing?) %>
-    <%= link_to "Edit cast", edit_show_path(*@show.params), :class => "edit button" %>
+    <%= link_to "Edit cast", edit_show_path(*@show.params), :class => "edit button" if can? :edit, @show %>
   </div>
   <div class="grid_9 players omega">
     <h2>Players</h2>
