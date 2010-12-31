@@ -57,9 +57,9 @@ module JestersHelper
   end
   
   def recent_play(jester)
-    f = @jester.shows.as_player.after(1.month.ago).count
+    f = @jester.shows.as_player.before(Date.today).after(1.month.ago).count
     if f.zero?
-      if last_show = @jester.shows.as_player.order("shows.date ASC").last
+      if last_show = @jester.shows.as_player.before(Date.today).order("shows.date ASC").last
         "This Jester last played about #{time_ago_in_words(last_show.date)} ago."
       else
         "This Jester has no recorded play time."
