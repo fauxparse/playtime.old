@@ -7,7 +7,7 @@ module JestersHelper
     end
   end
   
-  def play_percentage(jester, window = 3.months)
+  def play_percentage(jester, window = 90.days)
     availability = jester.availability.select { |a| a.show.date > Date.today - window }
     percentage = if availability.any?
       100.0 * availability.select(&:playing?).length / availability.length

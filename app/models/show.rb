@@ -14,7 +14,7 @@ class Show < ActiveRecord::Base
   scope :before, lambda { |date| where("date < ?", date) }
   scope :as_player, where("players.role = ?", :player)
   scope :as_mc, where("players.role = ?", :mc)
-  scope :as_player_or_mc, where("players.role IS NOT NULL")
+  scope :as_player_or_mc, where("players.role IS NOT NULL AND players.role <> ''")
   
   delegate :params, :to => :date
   
@@ -59,7 +59,7 @@ class Show < ActiveRecord::Base
   end
   
   def all_in?
-    !players.any? { |p| p.role.nil? }
+    players.any? && !players.any? { |p| p.role.blank? }
   end
   
 end

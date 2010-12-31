@@ -384,7 +384,9 @@ h2 {
   margin: 8px 0px;
 }
 
-a { color: #ec008c; text-decoration: none; }
+a { color: #ec008c; text-decoration: none; outline: none; }
+
+a img { border: none; }
 
 /* }}} */
 
@@ -596,11 +598,11 @@ dd small {
 
 /* }}} */
 
-/* Index {{{ */
+/* Jesters index {{{ */
 
 .jester {
   position: relative;
-  height: 3em;
+  height: 44px;
   border-bottom: 1px solid #444;
 }
 
@@ -674,9 +676,9 @@ dd small {
 }
 
 .week {
-  clear: left;
+  clear: both;
   width: 280px;
-  height: 40px;
+  min-height: 40px;
   border-bottom: 1px solid #666;
 }
 
@@ -716,9 +718,12 @@ dd small {
 }
 
 .calendar .show-preview {
-  border-bottom: 1px solid #666;
+  clear: left;
+  border-top: 1px solid #666;
   padding: 8px 40px 8px 8px;
   position: relative;
+  height: 48px;
+  overflow: visible;
 }
 
 .calendar .show-preview h3 {
@@ -742,7 +747,7 @@ dd small {
   line-height: 32px;
   text-align: right;
   vertical-align: middle;
-  font-size: 150%;
+  font-size: 250%;
   color: #666;
 }
 

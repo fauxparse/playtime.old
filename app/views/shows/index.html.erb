@@ -7,8 +7,8 @@
 <div class="shows">
   <div class="dates grid_12 alpha">
     <h2><%= @month.strftime("%b %Y") %></h2>
-    <%= link_to "◀", shows_path(@last_month.year, @last_month.month), :class => "back" %>
-    <%= link_to "▶", shows_path(@next_month.year, @next_month.month), :class => "next" %>
+    <%= link_to "«", shows_path(@last_month.year, @last_month.month), :class => "back" %>
+    <%= link_to "»", shows_path(@next_month.year, @next_month.month), :class => "next" %>
   </div>
   
   <div class="calendar">
@@ -17,12 +17,14 @@
         <% week.each do |day| %>
           <%= content_tag :div, :class => "day day-#{day.wday}#{' filler' unless (@month...@next_month).include?(day)}" do %>
             <% if @shows.key?(day) %>
-              <%= link_to day.day, show_path(day.year, day.month, day.day), :class => :show %>
-              <%= render "preview", :show => @shows[day] %>
+              <%= link_to day.day, "#show_#{day.to_s(:db)}", :class => :show %>
             <% else %>
               <%= link_to day.day, show_path(day.year, day.month, day.day), :class => :new %>
             <% end %>
           <% end %>
+        <% end %>
+        <% week.each do |day| %>
+          <%= render "preview", :show => @shows[day] if @shows.key?(day) %>
         <% end %>
       </div>
     <% end %>
@@ -36,13 +38,12 @@
         if (!this.hasClass('active')) {
           active = this.getParent('.calendar').getElement('.active');
           if (active) {
-            active.removeClass('active');
-            active.getNext('.show-preview').dissolve();
+            active.fireEvent('click');
           }
-          this.getNext('.show-preview').reveal();
+          $(this.get('href').substring(1)).reveal();
           this.addClass('active');
         } else {
-          this.getNext('.show-preview').dissolve();
+          $(this.get('href').substring(1)).dissolve();
           this.removeClass('active');
         }
         return false;

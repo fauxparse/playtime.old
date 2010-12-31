@@ -7,6 +7,8 @@ class Player < ActiveRecord::Base
   scope :playing_or_mcing, where(:role => [ :player, :mc ])
   
   delegate :to_s, :image, :name, :to => :jester
+  
+  before_save :nil_not_blank!
 
   def role
     super.try :to_sym
@@ -21,11 +23,16 @@ class Player < ActiveRecord::Base
   end
   
   def playing_or_mcing?
-    role.present?
+    !role.blank?
   end
   
   def date
     show.try :date
   end
-  
+
+protected
+  def nil_not_blank!
+    self.role = nil if self.role.blank?
+  end
+    
 end
