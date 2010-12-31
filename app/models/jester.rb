@@ -11,9 +11,13 @@ class Jester < ActiveRecord::Base
   has_friendly_id :name, :use_slug => true
   
   scope :active, where(:active => true)
-
+  
   def name
-    super || [ first_name, last_initial ].join(" ").strip
+    if (n = super).blank?
+      [ first_name, last_initial ].join(" ").strip
+    else
+      n
+    end
   end
   
   def last_initial
@@ -49,10 +53,17 @@ class Jester < ActiveRecord::Base
   end
   
   def percentage(window = 90.days)
-    100.0 * shows.as_player.after(window.ago).count /
-    shows.after(window.ago).count
+    played = shows.as_player.after(window.ago).count
+    available = shows.after(window.ago).count
+    available.zero? ? 0.0 : 100.0 * played / available
   end
   memoize :percentage
+  
+  def availability_percentage(window = 90.days)
+    100.0 * shows.after(window.ago).count /
+    Show.after(window.ago).count
+  end
+  memoize :availability_percentage
   
   def favourite_players(n = 5)
     Jester.find_by_sql <<-SQL
@@ -88,5 +99,5 @@ class Jester < ActiveRecord::Base
     SQL
   end
   memoize :most_seen_with
-  
+
 end

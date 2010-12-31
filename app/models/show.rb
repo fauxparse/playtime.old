@@ -58,4 +58,8 @@ class Show < ActiveRecord::Base
     players.select(&:mcing?).map(&:jester)
   end
   
+  def all_in?
+    !players.any? { |p| p.role.nil? }
+  end
+  
 end

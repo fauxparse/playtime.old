@@ -48,4 +48,25 @@ module JestersHelper
     link_to title, target, :class => "#{name}#{' active' if active}"
   end
   
+  def frequency(n)
+    case n
+    when 1 then "once"
+    when 2 then "twice"
+    else pluralize n, "time"
+    end
+  end
+  
+  def recent_play(jester)
+    f = @jester.shows.as_player.after(1.month.ago).count
+    if f.zero?
+      if last_show = @jester.shows.as_player.order("shows.date ASC").last
+        "This Jester last played about #{time_ago_in_words(last_show.date)} ago."
+      else
+        "This Jester has no recorded play time."
+      end
+    else
+      "This Jester has played #{frequency(f)} in the last month."
+    end
+  end
+  
 end

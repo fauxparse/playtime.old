@@ -31,7 +31,7 @@
   <div class="grid_4 omega">
     <dl class="current-percentage-summary">
       <dt>Current percentage</dt>
-      <dd><%= "%.1f%%" % @jester.percentage(90.days) %> <small>(Last 90 days)</small></dd>
+      <dd title="The first number is the amount of time you play (not MC) when you are available. The second number is how often you are available to play."><%= "%.1f%%" % @jester.percentage(90.days) %> <i><%= "/ %.1f%%" % @jester.availability_percentage(90.days) %></i> <small>(Last 90 days)</small></dd>
     </dl>
   </div>
 </div>
@@ -55,7 +55,7 @@
 </div>
 
 <div class="grid_12 alpha omega explain current-percentage">
-  <div class="graph">
+  <div class="graph" title="The white line is how often you've played over the last 90 days. Green lines are shows when you were available, and red lines are when you weren't. Green dots are when you played, and blue dots are when you MCed.">
     <canvas></canvas>
   </div>
 </div>
@@ -71,7 +71,10 @@
 </div>
 
 <div class="grid_4 omega">
-  
+  <dl>
+    <dt>Recent play</dt>
+    <dd><%= recent_play @jester %></dd>
+  </dl>
 </div>
 
 <%= clear_floats %>
@@ -83,9 +86,9 @@
     
     function rollingPercentage(date, window) {
       date = date || (new Date()).getTime();
-      window = window || (45 * 24 * 60 * 60 * 1000); // 90-day window
+      window = window || (90 * 24 * 60 * 60 * 1000); // 90-day window
       var slice = play_data.filter(function(d) {
-        return (d[0] >= date - window) && (d[0] <= date + window);
+        return (d[0] >= date - window) && (d[0] <= date);
       });
       if (slice.length) {
         return 100.0 * slice.filter(function(d) { return d[1] == 'player'; }).length / slice.length;
@@ -125,9 +128,6 @@
     			  var date = (new Date()).getTime(), window = 365 * one_day;
     			  date -= date % one_day;
     			  
-            // context.fillStyle = '#222';
-            // context.fillRect((window - (45 * one_day)) * 752 / window, 0, 752, 112);
-  			  
             for (i = date - window; i < date; i+= one_day) {
               var d = new Date(i), w = d.getDay();
               if (w == 5 || w == 6) {
@@ -161,7 +161,7 @@
           
             play_data.each(function(d) {
               if (d[1] == 'player' || d[1] == 'mc') {
-                context.fillStyle = d[1] == 'player' ? 'rgba(141,198,63,0.5)' : 'rgba(236,0,140,0.5)';
+                context.fillStyle = d[1] == 'player' ? 'rgba(141,198,63,0.5)' : 'rgba(0,174,239,0.5)';
                 x = (d[0] - (date - window)) * 752 / window;
                 context.beginPath();
                 context.arc(x, 120 + (d[1] == 'mc' ? 4 : 0), 4, 0, Math.PI * 2);

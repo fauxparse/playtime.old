@@ -527,6 +527,12 @@ dd {
 
 dd a { color: #eee; }
 
+dd i {
+  color: #999;
+  font-style: normal;
+  font-size: 75%;
+}
+
 dd small {
   display: block;
   font-size: 66.66%;
@@ -537,7 +543,7 @@ dd small {
 .explain {
   clear: left;
   background: #111;
-  margin: 0px -8px 8px;
+  margin: 0px -8px 16px;
   padding: 8px;
   position: relative;
 }
@@ -582,6 +588,10 @@ dd small {
 .explain .graph canvas {
   width: 752px;
   height: 128px;
+}
+
+.favourites h2 {
+  margin-top: 0px;
 }
 
 /* }}} */
