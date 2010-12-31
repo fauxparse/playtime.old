@@ -1031,19 +1031,6 @@ ul.casting li img {
 	-moz-box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 6px;
 }
 
-.tip:before {
-  content: '.';
-  overflow: hidden;
-  text-indent: -10em;
-  position: absolute;
-  left: 8px;
-  top: -12px;
-  border-left: 12px solid rgba(0, 0, 0, 0.5);
-  border-top: 12px solid transparent;
-  width: 0px;
-  height: 0px;
-}
-
 /* }}} */
 
 /* Buttons {{{ */

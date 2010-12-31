@@ -1,5 +1,5 @@
 var toolTips = new Tips('[title]', {
-  offset: { x:-8, y:16 }
+  offset: { x:16, y:-8 }
 });
 
 if (Browser.Platform.ios) {

@@ -35,7 +35,7 @@ class Show < ActiveRecord::Base
           if available + player + mc > 0
             Player.create :show => show, :jester => jester, :role => :mc if mc == 1
             Player.create :show => show, :jester => jester, :role => :player if player == 1
-            Player.create :show => show, :jester => jester if mc.zero? && player.zero?
+            Player.create :show => show, :jester => jester, :role => nil if mc.zero? && player.zero?
           end
         end
         row += 3
