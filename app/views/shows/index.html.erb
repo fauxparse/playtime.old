@@ -36,10 +36,7 @@
     window.addEvent('domready', function() {
       $$('.calendar a.show').addEvent('click', function() {
         if (!this.hasClass('active')) {
-          active = this.getParent('.calendar').getElement('.active');
-          if (active) {
-            active.fireEvent('click');
-          }
+          this.getParent('.calendar').getElements('.active').fireEvent('click');
           $(this.get('href').substring(1)).reveal();
           this.addClass('active');
         } else {
