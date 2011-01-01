@@ -353,10 +353,11 @@ body {
 body, td, input, select, textarea {
   font: 14px/1.5em "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
-
+/*
 body, td {
   letter-spacing: -0.1em;
 }
+*/
 
 /* Text styles {{{ */
 

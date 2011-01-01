@@ -271,6 +271,7 @@ ul.casting {
 }
 
 .login .text input {
+  width: 296px;
   -webkit-appearance: none;
 }
 
