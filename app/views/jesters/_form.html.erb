@@ -29,6 +29,12 @@
       <%= form.password_field :password_confirmation, :placeholder => "••••••••", :class => :text %>
     </div>
   </li>
+  <% if can? :destroy, Jester %>
+    <li class="checkbox">
+      <%= form.check_box :active %>
+      <%= form.label :active, "Active?" %>
+    </li>
+  <% end %>
 </ol>
 <%= clear_floats %>
 

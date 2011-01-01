@@ -1096,6 +1096,12 @@ ol.form li label {
   letter-spacing: normal;
 }
 
+ol.form li.checkbox label {
+  display: inline;
+  text-transform: none;
+  color: #eee;
+}
+
 ol.form li input.text {
   display: block;
   font-size: 150%;
