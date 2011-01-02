@@ -12,7 +12,7 @@ Playtime::Application.routes.draw do
   get "shows/:year/:month/:day/edit" => "shows#edit", :as => :edit_show
   put "shows/:year/:month/:day" => "shows#update"
   
-  namespace :show, :path => "shows/:year/:month/:day" do
+  scope :as => :show, :path => "shows/:year/:month/:day" do
     resources :notes
   end
   
