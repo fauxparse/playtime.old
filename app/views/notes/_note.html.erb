@@ -1,0 +1,18 @@
+<%= content_tag :div, :class => :note, :id => dom_id(note) do %>
+  <div class="content grid_9 alpha">
+    <%= note.content.html_safe %>
+    <%= content_tag :p, "(Edited #{note.updated_at.strftime("%e/%m/%y at %I:%M%p").downcase})", :class => :edited if note.updated_at > note.created_at %>
+    <% if can? :edit, note %>
+      <div class="edit-links">
+        <%= link_to "Edit", edit_note_path(note, :js), :class => :edit, :remote => true %> or
+        <%= link_to "delete", note_path(note), :class => :delete, :method => :delete %> this note
+      </div>
+    <% end %>
+  </div>
+  <div class="author grid_3 omega">
+    <%= portrait note.author, 48 %>
+    <%= link_to note.author, jester_path(note.author), :class => :name %>
+    <%= content_tag :small, note.created_at.strftime("%e/%m/%y, %I:%M%p").downcase, :class => :date %>
+  </div>
+  <%= clear_floats %>
+<% end %>

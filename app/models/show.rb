@@ -5,6 +5,7 @@ class Show < ActiveRecord::Base
   
   has_many :players, :inverse_of => :show, :dependent => :destroy, :include => :jester
   has_many :jesters, :through => :players
+  has_many :notes, :as => :notable, :order => "created_at ASC"
   
   accepts_nested_attributes_for :players
 

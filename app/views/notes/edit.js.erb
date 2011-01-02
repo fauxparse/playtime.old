@@ -1,0 +1,4 @@
+$('note_content').set('html', '<%= escape_javascript(note.content(:source)) %>').focus();
+$$('form.note-editor').set('action', '<%= note_path note %>');
+$$('form.note-editor input[name=_method]').set('value', 'put');
+$$('form.note-editor h2.alpha').set('html', 'Edit note&hellip;');

@@ -12,6 +12,10 @@ Playtime::Application.routes.draw do
   get "shows/:year/:month/:day/edit" => "shows#edit", :as => :edit_show
   put "shows/:year/:month/:day" => "shows#update"
   
+  namespace :show, :path => "shows/:year/:month/:day" do
+    resources :notes
+  end
+  
   get "login" => "jester_sessions#new", :as => :login
   post "login" => "jester_sessions#create"
   get "logout" => "jester_sessions#destroy", :as => :logout

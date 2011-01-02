@@ -13,6 +13,11 @@ class Ability
       can :update, Show do |show|
         show.mcs.include?(jester)
       end
+      can :create, Note
+      can [ :update, :destroy ], Note do |note|
+        note.author_id == jester.id
+      end
     end
   end
+  
 end

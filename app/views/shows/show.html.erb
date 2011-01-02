@@ -16,3 +16,44 @@
   </div>
   <%= clear_floats %>
 <% end %>
+
+<% if @show.notes.any? %>
+  <%= content_tag :h2, pluralize(@show.notes_count, "note") %>
+  <%= render @show.notes %>
+<% end %>
+
+<%= form_for @note || @show.notes.build, :as => :note, :url => show_notes_path(*@show.params), :html => { :class => "container_12 note-editor" } do |form| %>
+  <%= hidden_field_tag :_method, :post %>
+  <h2 class="grid_12 alpha omega">Add notes for this show&hellip;</h2>
+  <div class="grid_6 alpha">
+    <div class="editor">
+      <%= form.text_area :content, :rows => 8 %>
+    </div>
+    <%= form.submit "Post note", :class => :button %>
+  </div>
+  <div class="grid_6 preview omega">
+    <div class="preview-inner">
+      
+    </div>
+  </div>
+  <%= clear_floats %>
+<% end %>
+
+<% content_for :scripts do %>
+  <%= javascript_include_tag "textile-editor" %>
+  <script>
+    if (!Browser.Platform.ios) {
+      document.write(unescape('%3Cscript%20src%3D%22/javascripts/textile-editor.js%22%20type%3D%22text/javascript%22%3E%3C/script%3E'));
+    }
+  
+    window.addEvent('domready', function() {
+      if (!Browser.Platform.ios) {
+        new TextileEditor("note_content", "extended");
+        (function() {
+          $$('.preview-inner').set('html', convert($('note_content').value));
+          setTimeout(arguments.callee, 500);
+        })();
+      }
+    });
+  </script>
+<% end %>

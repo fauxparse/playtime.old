@@ -353,11 +353,6 @@ body {
 body, td, input, select, textarea {
   font: 14px/1.5em "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
-/*
-body, td {
-  letter-spacing: -0.1em;
-}
-*/
 
 /* Text styles {{{ */
 
@@ -1018,6 +1013,180 @@ ul.casting li img {
 }
 
 .availability label.active { background: #00aeef; }
+
+/* }}} */
+
+/* Notes {{{ */
+
+.note {
+  margin: 0px 0px 8px;
+}
+
+.note .content {
+  position: relative;
+  padding: 8px;
+  min-height: 32px;
+  background: #eee;
+  color: #333;
+  text-shadow: white 0px 1px 1px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+}
+
+.note .content:before {
+  content: '.';
+  text-indent: -10em;
+  overflow: hidden;
+  position: absolute;
+  right: -12px;
+  top: 20px;
+  width: 0px;
+  height: 0px;
+  border-top: 12px solid #eee;
+  border-right: 12px solid transparent;
+}
+
+.note .content p,
+.note-editor .content p {
+  margin: 0px 0px 0.5ex;
+  padding: 0px;
+}
+
+.note p.edited {
+  color: #999;
+}
+
+.note .edit-links {
+  margin-top: 8px;
+  padding-top: 4px;
+  border-top: 1px solid #ccc;
+  line-height: 1.2;
+  color: #999;
+}
+
+.note .author {
+  position: relative;
+  min-height: 48px;
+}
+
+.note .author img {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 4px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 4px;
+}
+
+.note .author .name,
+.note .author .date {
+  display: block;
+  margin-left: 56px;
+  line-height: 1.2;
+}
+
+.note .author .name {
+  font-size: 125%;
+  font-weight: bold;
+}
+
+.note-editor .editor {
+  background: #111;
+  position: relative;
+  -webkit-border-top-left-radius: 4px;
+  -webkit-border-top-right-radius: 4px;
+  -moz-border-radius-topleft: 4px;
+  -moz-border-radius-topright: 4px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0px -1px 1px, rgba(255, 255, 255, 0.25) 0px 1px 1px;  
+  -moz-box-shadow: rgba(0, 0, 0, 0.5) 0px -1px 1px, rgba(255, 255, 255, 0.25) 0px 1px 1px;  
+}
+
+.textile-toolbar {
+  background: #333;
+  height: 32px;
+  -webkit-border-top-left-radius: 4px;
+  -webkit-border-top-right-radius: 4px;
+  -moz-border-radius-topleft: 4px;
+  -moz-border-radius-topright: 4px;
+  -webkit-box-shadow: inset rgba(255, 255, 255, 0.25) 0px 1px 1px, inset rgba(0, 0, 0, 0.5) 0px -1px 1px;
+  -moz-box-shadow: inset rgba(255, 255, 255, 0.25) 0px 1px 1px, inset rgba(0, 0, 0, 0.5) 0px -1px 1px;
+}
+
+.textile-toolbar button {
+  float: left;
+  display: block;
+  width: 25px;
+  height: 25px;
+  margin: 4px 0px 0px 4px;
+  padding: 0px;
+  border: 1px solid #222;
+  background: url(/images/editor.png) no-repeat 0px 0px;
+  cursor: pointer;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-appearance: none;
+  -webkit-transition: all 0.25s ease-in;
+}
+
+.textile-toolbar button:hover {
+  border-color: #999;
+  -webkit-box-shadow: #ec008c 0px 0px 4px;
+  -moz-box-shadow: #ec008c 0px 0px 4px;
+}
+
+.textile-toolbar #ed_strong { background-position: 0px 0px; }
+.textile-toolbar #ed_emphasis { background-position: -24px 0px; }
+.textile-toolbar #ed_underline { background-position: -48px 0px; }
+.textile-toolbar #ed_ol { background-position: -72px 0px; }
+.textile-toolbar #ed_ul { background-position: -96px 0px; }
+.textile-toolbar #ed_h3 { background-position: -120px 0px; }
+.textile-toolbar #ed_block { background-position: -144px 0px; }
+
+.textile-toolbar button img {
+  display: none;
+}
+
+.note-editor textarea {
+  display: block;
+  margin: 0px;
+  border: none;
+  width: 360px;
+  max-width: 360px;
+  padding: 4px;
+  background: #eee;
+  -webkit-box-shadow: inset rgba(0, 0, 0, 0.25) 0px 1px 4px;
+  -moz-box-shadow: inset rgba(0, 0, 0, 0.25) 0px 1px 4px;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+.note-editor .preview {
+  position: relative;
+  background: #c8c8a2;
+  color: #333;
+  padding: 8px 8px 48px;
+  min-height: 152px;
+  text-shadow: #ffc 0px 1px 1px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+}
+
+.note-editor .preview:before {
+  content: '.';
+  text-indent: -10em;
+  overflow: hidden;
+  position: absolute;
+  left: -12px;
+  top: 32px;
+  width: 0px;
+  height: 0px;
+  border-right: 12px solid #c8c8a2;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+}
+
+.note-editor .button {
+  margin: 8px 0px;
+  padding: 2px 8px;
+}
 
 /* }}} */
 

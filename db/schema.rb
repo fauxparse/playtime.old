@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101228100221) do
+ActiveRecord::Schema.define(:version => 20110101223442) do
 
   create_table "jesters", :force => true do |t|
     t.string   "first_name",                             :null => false
@@ -39,6 +39,17 @@ ActiveRecord::Schema.define(:version => 20101228100221) do
 
   add_index "jesters", ["cached_slug"], :name => "index_jesters_on_cached_slug", :unique => true
 
+  create_table "notes", :force => true do |t|
+    t.integer  "notable_id"
+    t.string   "notable_type"
+    t.integer  "author_id"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "notes", ["notable_type", "notable_id"], :name => "index_notes_on_notable_type_and_notable_id"
+
   create_table "players", :force => true do |t|
     t.integer "show_id",   :null => false
     t.integer "jester_id", :null => false
@@ -51,6 +62,7 @@ ActiveRecord::Schema.define(:version => 20101228100221) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "cached_slug"
+    t.integer  "notes_count", :default => 0,     :null => false
   end
 
   create_table "slugs", :force => true do |t|
