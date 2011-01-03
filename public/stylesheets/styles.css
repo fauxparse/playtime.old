@@ -494,6 +494,50 @@ a img { border: none; }
   position: relative;
 }
 
+.related-links {
+  margin: -12px -8px 8px;
+  padding: 4px 0px;
+  height: 24px;
+  background: #666;
+  background: rgba(255, 255, 255, 0.25);
+  -webkit-border-bottom-left-radius: 8px;
+  -webkit-border-bottom-right-radius: 8px;
+  -moz-border-radius-bottomleft: 8px;
+  -moz-border-radius-bottomright: 8px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0px 2px 4px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.5) 0px 2px 4px;
+}
+
+.related-links li {
+  display: inline;
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+}
+
+.related-links li a {
+  float: left;
+  height: 24px;
+  line-height: 24px;
+  vertical-align: middle;
+  font-size: 125%;
+  font-weight: bold;
+  color: #111;
+  text-shadow: rgba(255, 255, 255, 0.25) 0px 1px 1px;
+  padding: 0px 8px;
+  border-right: 1px solid #333;
+}
+
+.related-links li:last-child a {
+  border-right: none;
+  
+}
+
+.related-links li a:hover {
+  color: #eee;
+  text-shadow: #ec008c 0px 0px 4px;
+}
+
 /* }}} */
 
 /* Jester profile {{{ */

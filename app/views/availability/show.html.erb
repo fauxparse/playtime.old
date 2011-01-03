@@ -4,6 +4,12 @@
   <h1>Availability</h1>
 <% end %>
 
+<ul class="related-links">
+  <% @shows.each do |show| %>
+    <li><%= link_to "Cast for #{show.date.strftime("%A")}", show_path(*show.params) %></li>
+  <% end %>
+</ul>
+
 <div id="availability" class="container_12">
   <%= form_tag availability_path(*(@dates.first - @dates.first.wday).params), :method => :put do %>
     <div class="dates grid_9 alpha">
@@ -16,7 +22,7 @@
       <%= submit_tag "Save", :class => "save button" %>
     </div>
 
-    <% Jester.except_musos.sort_by(&:name).in_groups(2, false).each_with_index do |group, i| %>
+    <% Jester.all.sort_by(&:name).in_groups(2, false).each_with_index do |group, i| %>
       <%= content_tag :div, :class => "grid_6 #{i == 0 ? :alpha : :omega} availability-group" do %>
         <% group.each do |jester| %>
           <%= render "availability", :jester => jester, :shows => @shows %>

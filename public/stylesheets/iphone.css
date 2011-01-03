@@ -83,6 +83,16 @@
   padding: 8px;
 }
 
+.related-links {
+  margin-top: -9px;
+  -webkit-border-bottom-left-radius: 0px;
+  -webkit-border-bottom-right-radius: 0px;
+}
+
+.related-links li a {
+  font-size: 115%;
+}
+
 /* }}} */
 
 /* Index {{{ */

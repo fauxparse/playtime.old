@@ -4,12 +4,21 @@
   <h1><%= @show.date.to_s(:long) %></h1>
 <% end %>
 
+<ul class="related-links">
+  <li><%= link_to "Edit availability", availability_path(*@show.params) %></li>
+</ul>
+
+
 <% form_for @show, :as => :show, :url => show_path(@show.date.year, @show.date.month, @show.date.day), :method => :put do |form| %>
   <div class="cast-editor container_12">
     <div class="grid_6 alpha cast">
       <h2>MC</h2>
       <ul class="casting" id="mc-cast">
         <%= render :partial => "jester", :collection => @show.players.select(&:mcing?).sort_by(&:to_s) %>
+      </ul>
+      <h2>Muso</h2>
+      <ul class="casting" id="muso-cast">
+        <%= render :partial => "jester", :collection => @show.players.select(&:musoing?).sort_by(&:to_s) %>
       </ul>
       <h2>Cast</h2>
       <ul class="casting" id="player-cast">
@@ -21,7 +30,7 @@
     <div class="grid_6 alpha available">
       <h2>Available</h2>
       <ul class="casting" id="available-cast">
-        <%= render :partial => "jester", :collection => @show.players.reject(&:playing_or_mcing?).sort_by(&:to_s) %>
+        <%= render :partial => "jester", :collection => @show.players.reject(&:has_role?).sort_by(&:to_s) %>
       </ul>
     </div>
   </div>

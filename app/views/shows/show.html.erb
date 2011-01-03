@@ -12,7 +12,7 @@
   </div>
   <div class="grid_9 players omega">
     <h2>Players</h2>
-    <%= render :partial => "shows/player", :collection => @show.players.select(&:playing?) %>
+    <%= render :partial => "shows/player", :collection => @show.players.select(&:has_role?).reject(&:mcing?) %>
   </div>
   <%= clear_floats %>
 <% end %>
