@@ -10,22 +10,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110101223442) do
+ActiveRecord::Schema.define(:version => 20110103055221) do
 
   create_table "jesters", :force => true do |t|
-    t.string   "first_name",                             :null => false
+    t.string   "first_name",                                :null => false
     t.string   "last_name"
     t.string   "name"
-    t.boolean  "admin",               :default => false, :null => false
-    t.boolean  "active",              :default => true,  :null => false
-    t.string   "email",                                  :null => false
-    t.string   "crypted_password",                       :null => false
-    t.string   "password_salt",                          :null => false
-    t.string   "persistence_token",                      :null => false
-    t.string   "single_access_token",                    :null => false
-    t.string   "perishable_token",                       :null => false
-    t.integer  "login_count",         :default => 0,     :null => false
-    t.integer  "failed_login_count",  :default => 0,     :null => false
+    t.boolean  "admin",               :default => false,    :null => false
+    t.boolean  "active",              :default => true,     :null => false
+    t.string   "email",                                     :null => false
+    t.string   "crypted_password",                          :null => false
+    t.string   "password_salt",                             :null => false
+    t.string   "persistence_token",                         :null => false
+    t.string   "single_access_token",                       :null => false
+    t.string   "perishable_token",                          :null => false
+    t.integer  "login_count",         :default => 0,        :null => false
+    t.integer  "failed_login_count",  :default => 0,        :null => false
     t.datetime "last_request_at"
     t.datetime "current_login_at"
     t.datetime "last_login_at"
@@ -35,9 +35,11 @@ ActiveRecord::Schema.define(:version => 20110101223442) do
     t.datetime "updated_at"
     t.string   "cached_slug"
     t.string   "image"
+    t.string   "type",                :default => "Jester", :null => false
   end
 
   add_index "jesters", ["cached_slug"], :name => "index_jesters_on_cached_slug", :unique => true
+  add_index "jesters", ["type", "active"], :name => "index_jesters_on_type_and_active"
 
   create_table "notes", :force => true do |t|
     t.integer  "notable_id"

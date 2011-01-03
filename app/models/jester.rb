@@ -10,7 +10,8 @@ class Jester < ActiveRecord::Base
   
   has_friendly_id :name, :use_slug => true
   
-  scope :active, where(:active => true)
+  scope :active, where("active = ? AND type = ?", true, Jester)
+  scope :except_musos, where("type <> ?", Muso)
   
   def name
     if (n = super).blank?

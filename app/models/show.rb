@@ -59,6 +59,10 @@ class Show < ActiveRecord::Base
     players.select(&:mcing?).map(&:jester)
   end
   
+  def musos
+    players.select(&:musoing?).map(&:jester)
+  end
+  
   def all_in?
     players.any? && !players.any? { |p| p.role.blank? }
   end

@@ -16,7 +16,7 @@
       <%= submit_tag "Save", :class => "save button" %>
     </div>
 
-    <% Jester.all.sort_by(&:name).in_groups(2, false).each_with_index do |group, i| %>
+    <% Jester.except_musos.sort_by(&:name).in_groups(2, false).each_with_index do |group, i| %>
       <%= content_tag :div, :class => "grid_6 #{i == 0 ? :alpha : :omega} availability-group" do %>
         <% group.each do |jester| %>
           <%= render "availability", :jester => jester, :shows => @shows %>

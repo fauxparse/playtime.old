@@ -1,0 +1,2 @@
+class Muso < Jester
+end
