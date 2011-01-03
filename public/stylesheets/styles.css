@@ -740,11 +740,10 @@ dd small {
   margin: -16px 0px;
   height: 32px;
   width: 32px;
-  line-height: 32px;
-  text-align: right;
-  vertical-align: middle;
-  font-size: 250%;
   color: #666;
+  text-indent: -20em;
+  overflow: hidden;
+  background: url(/images/arrows.png) no-repeat -44px -4px;
 }
 
 .day-0 .show-preview { margin: 0px -240px 0px 0px; }
@@ -902,7 +901,6 @@ ul.casting li img {
 
 .dates .back,
 .dates .next {
-  background: black;
   position: absolute;
   left: 0px;
   top: 0px;
@@ -914,11 +912,18 @@ ul.casting li img {
   color: #eee;
   text-decoration: none;
   font-size: 200%;
+  text-indent: -20em;
+  overflow: hidden;
+  background: #111 url(/images/arrows.png) no-repeat 0px 0px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
 }
 
-.dates .next { left: auto; right: 0px; }
+.dates .next {
+  left: auto;
+  right: 0px;
+  background-position: 100% 0px;
+}
 
 #availability .buttons {
   position: relative;
