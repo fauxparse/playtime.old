@@ -24,6 +24,10 @@
       <ul class="casting" id="player-cast">
         <%= render :partial => "jester", :collection => @show.players.select(&:playing?).sort_by(&:to_s) %>
       </ul>
+      <h2>Ushers</h2>
+      <ul class="casting" id="usher-cast">
+        <%= render :partial => "jester", :collection => @show.players.select(&:ushering?).sort_by(&:to_s) %>
+      </ul>
       <%= submit_tag "Save this cast", :class => "save button" %>
     </div>
     

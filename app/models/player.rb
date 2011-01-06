@@ -27,12 +27,16 @@ class Player < ActiveRecord::Base
     role == :muso
   end
   
+  def ushering?
+    role == :usher
+  end
+  
   def playing_or_mcing?
     playing? or mcing?
   end
   
   def has_role?
-    !role.blank?
+    playing? || mcing? || musoing?
   end
   
   def date

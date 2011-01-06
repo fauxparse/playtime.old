@@ -13,6 +13,9 @@
   <div class="grid_9 players omega">
     <h2>Players</h2>
     <%= render :partial => "shows/player", :collection => @show.players.select(&:has_role?).reject(&:mcing?) %>
+    <%= clear_floats %>
+    <%= render :partial => "shows/player", :collection => @show.players.select(&:ushering?) %>
+    <%= clear_floats %>
   </div>
   <%= clear_floats %>
 <% end %>
