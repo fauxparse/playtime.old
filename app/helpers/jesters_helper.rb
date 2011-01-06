@@ -69,4 +69,17 @@ module JestersHelper
     end
   end
   
+  def recent_ushering(jester)
+    f = @jester.shows.as_usher.after(Date.civil(Date.today.year, 1, 1)).count
+    if f.zero?
+      if last_show = @jester.shows.as_usher.before(Date.today).order("shows.date ASC").last
+        "This Jester last ushered about #{time_ago_in_words(last_show.date)} ago."
+      else
+        "This Jester has no recorded ushering."
+      end
+    else
+      "This Jester has ushered #{frequency(f)} this year."
+    end
+  end
+  
 end

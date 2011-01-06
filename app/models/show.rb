@@ -11,11 +11,12 @@ class Show < ActiveRecord::Base
 
   validates_presence_of :date
   
-  scope :after, lambda { |date| where("date > ?", date) }
+  scope :after, lambda { |date| where("date >= ?", date) }
   scope :before, lambda { |date| where("date < ?", date) }
   scope :as_player, where("players.role = ?", :player)
   scope :as_mc, where("players.role = ?", :mc)
   scope :as_player_or_mc, where("players.role IS NOT NULL AND players.role <> ''")
+  scope :as_usher, where("players.role = ?", :usher)
   
   delegate :params, :to => :date
   
