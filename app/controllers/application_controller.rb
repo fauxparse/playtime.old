@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   check_authorization
 
+  before_filter :set_time_zone
   before_filter :require_login
 
   rescue_from CanCan::AccessDenied do |exception|
@@ -11,6 +12,10 @@ class ApplicationController < ActionController::Base
   end
 
 protected
+  def set_time_zone
+    Time.zone = Playtime::Application.config.time_zone
+  end
+
   def current_session
     return @current_session if defined?(@current_session)
     @current_session = JesterSession.find
