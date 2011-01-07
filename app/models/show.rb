@@ -94,7 +94,7 @@ class Show < ActiveRecord::Base
   def self.calendar
     RiCal.Calendar do
       Show.where("date > ?", Date.today - 3.months).includes(:players => :jester).each do |show|
-        start_time = show.date.to_time.in_time_zone + 22.hours
+        start_time = show.date.to_time.in_time_zone("Auckland") + 22.hours
         
         event do
           summary     "Scared Scriptless"
