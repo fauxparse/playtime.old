@@ -1,11 +1,20 @@
 class ShowsController < ApplicationController
   def index
-    authorize! :read, Show
-    @month = date - date.day + 1
-    @last_month = @month - 1.month
-    @next_month = @month + 1.month
-    @shows = Show.where("date >= ? AND date < ?", @month, @month + 1.month).includes(:players => :jester).index_by(&:date)
+    respond_to do |format|
+      format.html do
+        @month = date - date.day + 1
+        @last_month = @month - 1.month
+        @next_month = @month + 1.month
+        @shows = Show.where("date >= ? AND date < ?", @month, @month + 1.month).includes(:players => :jester).index_by(&:date)
+      end
+      
+      format.ics do
+        render :text => Show.calendar
+      end
+    end
   end
+  skip_authorization_check :only => :index
+  skip_before_filter :require_login, :only => :index
 
   def show
     @show = Show.find_by_date(date, :include => { :players => :jester }) ||

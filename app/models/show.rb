@@ -1,6 +1,8 @@
 require "csv"
 
 class Show < ActiveRecord::Base
+  extend ActiveSupport::Memoizable
+  
   has_friendly_id :date_slug, :use_slug => true
   
   has_many :players, :inverse_of => :show, :dependent => :destroy, :include => :jester
@@ -59,13 +61,51 @@ class Show < ActiveRecord::Base
   def mcs
     players.select(&:mcing?).map(&:jester)
   end
+  memoize :mcs
   
   def musos
     players.select(&:musoing?).map(&:jester)
   end
+  memoize :musos
+  
+  def playing
+    players.select(&:playing?).map(&:jester)
+  end
+  memoize :playing
+  
+  def ushers
+    players.select(&:ushering?).map(&:jester)
+  end
+  memoize :ushers
   
   def all_in?
     players.any? && !players.any? { |p| p.role.blank? }
+  end
+  
+  def calendar_description
+    "".tap do |str|
+      str << "MC: #{mcs.to_sentence}\n" unless mcs.empty?
+      str << "Players: #{playing.to_sentence}\n" unless playing.empty?
+      str << "Muso: #{musos.to_sentence}\n" unless musos.empty?
+      str << "Ushers: #{ushers.to_sentence}\n" unless ushers.empty?
+    end
+  end
+  
+  def self.calendar
+    RiCal.Calendar do
+      Show.where("date > ?", Date.today - 3.months).includes(:players => :jester).each do |show|
+        start_time = show.date.to_time.in_time_zone + 22.hours
+        
+        event do
+          summary     "Scared Scriptless"
+          description show.calendar_description
+          dtstart     start_time
+          dtend       start_time + 1.5.hours
+          location    "The Court Theatre"
+        end
+      end    
+    end
+    
   end
   
 end
