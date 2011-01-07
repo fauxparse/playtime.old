@@ -93,6 +93,8 @@ class Show < ActiveRecord::Base
   
   def self.calendar
     RiCal.Calendar do
+      add_x_property "X-WR-CALNAME;VALUE=TEXT", "Scared Scriptless"
+      
       Show.where("date > ?", Date.today - 3.months).includes(:players => :jester).each do |show|
         start_time = Time.zone.local(show.date.year, show.date.month, show.date.day, 22, 0)
         event do
