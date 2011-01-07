@@ -44,7 +44,7 @@ module JestersHelper
   def navigation(name, target = nil, options = {})
     target ||= send :"#{options[:controller] || name}_path"
     title = options[:title] || name.to_s.humanize
-    active = (controller.controller_name == (options[:controller] || name.to_s))
+    active = (options[:controller] || name.to_s) === controller.controller_name
     link_to title, target, :class => "#{name}#{' active' if active}"
   end
   

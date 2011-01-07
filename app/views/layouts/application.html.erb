@@ -19,6 +19,7 @@
         <li><%= navigation :jesters, root_path %></li>
         <li><%= navigation :shows %></li>
         <li><%= navigation :availability %></li>
+        <li><%= navigation :awards, minties_path, :controller => /^(awards|minties)$/ %></li>
       </ul>
 
       <% if logged_in? %>

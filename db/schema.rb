@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110103055221) do
+ActiveRecord::Schema.define(:version => 20110106200007) do
 
   create_table "jesters", :force => true do |t|
     t.string   "first_name",                                :null => false
@@ -40,6 +40,23 @@ ActiveRecord::Schema.define(:version => 20110103055221) do
 
   add_index "jesters", ["cached_slug"], :name => "index_jesters_on_cached_slug", :unique => true
   add_index "jesters", ["type", "active"], :name => "index_jesters_on_type_and_active"
+
+  create_table "minties", :force => true do |t|
+    t.integer "category_id"
+    t.integer "jester_id"
+    t.string  "custom_category_name"
+    t.string  "nominees"
+    t.text    "nomination"
+    t.date    "date"
+  end
+
+  add_index "minties", ["date", "category_id"], :name => "index_minties_on_date_and_category_id"
+
+  create_table "minties_categories", :force => true do |t|
+    t.string  "name"
+    t.string  "cached_slug"
+    t.integer "minties_count", :default => 0, :null => false
+  end
 
   create_table "notes", :force => true do |t|
     t.integer  "notable_id"

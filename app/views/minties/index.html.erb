@@ -1,0 +1,40 @@
+<% content_for :title, "#{Date.today.year} Minties" %>
+
+<% content_for :header do %>
+  <h1><%= Date.today.year %> Minties</h1>
+<% end %>
+
+<div class="grid_6 alpha">
+  <h2>My Minties nominations</h2>
+
+  <% if @minties.empty? %>
+    <p>You haven't nominated any Minties.</p>
+  <% else %>
+    <dl class="nominations">
+      <% @grouped.each do |category, minties| %>
+        <dt><%= category || "Miscellaneous" %></dt>
+        <dd>
+          <ul>
+            <%= render :partial => minties %>
+          </ul>
+        </dd>
+      <% end %>
+    </dl>
+  <% end %>
+</div>
+
+<div class="grid_6 omega new-nomination">
+  <% if can? :create, Mintie %>
+    <%= render "minties/new" %>
+  <% end %>
+</div>
+
+<%= clear_floats %>
+
+<% content_for :scripts do %>
+  <script>
+    window.addEvent('domready', function() {
+      new Accordion($$('dl.nominations dt'), $$('dl.nominations dd'));
+    });
+  </script>
+<% end %>

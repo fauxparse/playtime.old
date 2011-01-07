@@ -31,6 +31,12 @@
   border-left: none;
 }
 
+#navigation ul li a {
+  font-size: 125%;
+  padding: 0px 4px;
+  letter-spacing: -1px;
+}
+
 #logged-in {
   position: absolute;
   top: -24px;
@@ -319,6 +325,34 @@ ul.casting {
 .note-editor .button {
   width: 304px;
   display: block;
+}
+
+/* }}} */
+
+/* Awards {{{ */
+
+dl.nominations {
+  width: 302px;
+}
+
+dl.nominations dd ul li p.edit-links { font-size: 100%; }
+
+.new-nomination {
+  margin: 0px;
+  padding: 0px;
+  width: 304px;
+}
+
+form.mintie ol.form li select {
+  width: 304px;
+}
+
+form.mintie ol.form li input {
+  width: 288px;
+}
+
+form.mintie ol.form li textarea {
+  width: 296px;
 }
 
 /* }}} */

@@ -1239,6 +1239,82 @@ ul.casting li img {
 
 /* }}} */
 
+/* Awards {{{ */
+
+dl.nominations {
+  margin: 0px -1px 8px;
+  background: #111;
+  border: 1px solid black;
+  -webkit-box-shadow: rgba(255, 255, 255, 0.25) 0px 1px 1px;
+  -moz-box-shadow: rgba(255, 255, 255, 0.25) 0px 1px 1px;
+}
+
+dl.nominations dt {
+  margin: 0px;
+  padding: 0px 8px;
+  background: #333;
+  height: 24px;
+  line-height: 20px;
+  vertical-align: middle;
+  font-size: 125%;
+  font-weight: bold;
+  text-transform: none;
+  color: #eee;
+  text-shadow: black 0px -1px 1px;
+  -webkit-box-shadow: inset rgba(255, 255, 255, 0.25) 0px 1px 1px, inset rgba(0, 0, 0, 0.25) 0px -1px 1px, inset rgba(255, 255, 255, 0.12) 0px 12px 1px;
+  
+}
+
+dl.nominations dd {
+  margin: 0px;
+  padding: 0px;
+  font-size: 100%;
+  font-weight: normal;
+}
+
+dl.nominations dd ul {
+  margin: 0px;
+  padding: 0px 8px 8px;
+}
+
+dl.nominations dd ul li {
+  margin: 0px;
+  padding: 4px 0px;
+  list-style: none;
+  border-bottom: 1px solid #333;
+}
+
+dl.nominations dd ul li .nominees {
+  font-weight: bold;
+  display: block;
+}
+
+dl.nominations dd ul li:last-child {
+  border-bottom: none;
+  padding-bottom: 0px;
+}
+
+dl.nominations dd ul li p {
+  margin: 0px 0px 4px;
+}
+
+dl.nominations dd ul li p.edit-links {
+  color: #666;
+  font-size: 85%;
+}
+
+dl.nominations dd ul li p.edit-links a {
+  color: #ec008c;
+}
+
+form.mintie ol.form li input,
+form.mintie ol.form li select,
+form.mintie ol.form li textarea {
+  width: 98%;
+}
+
+/* }}} */
+
 /* Footer {{{ */
 
 #footer {
@@ -1352,6 +1428,59 @@ form.jester_new .button {
   position: absolute;
   right: 8px;
   top: -56px;
+}
+
+ul.autocompleter-choices {
+  position: absolute;
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+  border: 1px solid #999;
+  background-color: #eee;
+  background-color: rgba(255, 255, 255, 0.85);
+  color: #333;
+  text-align: left;
+  z-index: 50;
+}
+
+ul.autocompleter-choices li {
+  position: relative;
+  margin: 0px;
+  padding: 0px 8px;
+  display: block;
+  list-style: none;
+  float: none !important; 
+  cursor: pointer;
+  font-weight: normal;
+  white-space: nowrap;
+  font-size: 1em;
+  line-height: 1.5em;
+  vertical-align: middle;
+}
+
+ul.autocompleter-choices li.autocompleter-selected {
+  background-color: #ec008c;
+  color: #fff;
+}
+
+ul.autocompleter-choices span.autocompleter-queried {
+  display: inline;
+  float: none;
+  font-weight: bold;
+  margin: 0px;
+  padding: 0px;
+}
+
+.error-messages {
+  padding: 8px;
+  margin: 0px 0px 8px;
+  background: #c8c8a2;
+  color: #333;
+  text-shadow: #ffc 0px 1px 1px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -webkit-box-shadow: rgba(255, 255, 255, 0.25) 0px 1px 1px;
+  -moz-box-shadow: rgba(255, 255, 255, 0.25) 0px 1px 1px;
 }
 
 /* }}} */

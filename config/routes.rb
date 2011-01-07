@@ -16,6 +16,10 @@ Playtime::Application.routes.draw do
     resources :notes
   end
   
+  scope :path => "awards" do
+    resources :minties
+  end
+    
   get "login" => "jester_sessions#new", :as => :login
   post "login" => "jester_sessions#create"
   get "logout" => "jester_sessions#destroy", :as => :logout

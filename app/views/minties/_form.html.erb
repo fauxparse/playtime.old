@@ -1,0 +1,34 @@
+<%= render "shared/errors", :target => form.object %>
+<ol class="form">
+  <li><%= form.label :category_id %> <%= form.select :category_id, MintiesCategory.all.sort_by(&:to_s).map { |c| [ c.to_s, c.id ] }, :include_blank => "Custom category…" %></li>
+  <li class="custom-category"><%= form.text_field :custom_category_name %></li>
+  <li><%= form.label :nominees, "Nominee(s)" %> <%= form.text_field :nominees %></li>
+  <li><%= form.label :nomination, "Explanation" %><%= form.text_area :nomination, :rows => 8 %></li>
+</ol>
+<%= form.submit form.object.new_record? ? "Submit nomination" : "Save nomination", :class => :button %>
+<% content_for :scripts do %>
+  <%= javascript_include_tag "autocomplete" %>
+  <script>
+    window.addEvent('domready', function() {
+      $('mintie_category_id').addEvent('change', function() {
+        if (!!this.value) {
+          $$('li.custom-category').dissolve();
+        } else {
+          $$('li.custom-category').reveal();
+        }
+      }).fireEvent('change');
+      
+      var jesters = <%= Jester.all.map(&:to_s).inspect.html_safe %>;
+      
+      new Autocompleter.Local('mintie_nominees', jesters, {
+    		'minLength': 1,
+    		'selectMode': 'type-ahead',
+    		'multiple': true
+    	});
+    	
+    	$('mintie_nominees').addEvent('blur', function() {
+    	  this.value = this.value.replace(/,\s+$/, '');
+    	});
+    });
+  </script>
+<% end %>

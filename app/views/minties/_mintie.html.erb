@@ -1,0 +1,5 @@
+<li>
+  <strong class="nominees"><%= mintie.nominees %><%= " for #{mintie.custom_category_name}" unless mintie.category_id? %></strong>
+  <%= mintie.nomination.html_safe %>
+  <p class="edit-links"><%= link_to "Edit", edit_mintie_path(mintie) %> or <%= link_to "delete", mintie_path(mintie), :method => :delete %> this nomination</p>
+</li>

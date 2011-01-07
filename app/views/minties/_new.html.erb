@@ -1,0 +1,4 @@
+<%= form_for @mintie || Mintie.new, :as => :mintie, :url => minties_path, :html => { :class => "mintie" } do |form| %>
+  <h2>Nominate someone</h2>
+  <%= render "minties/form", :form => form %>
+<% end %>
