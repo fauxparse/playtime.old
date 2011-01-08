@@ -116,11 +116,11 @@
     			onComplete: function(data) {
     			  play_data = data.points.map(function(d) {
     			    dmy = d[0].split('-');
-    			    var date = new Date(parseInt(dmy[0]), parseInt(dmy[1] - 1), parseInt(dmy[2]));
+    			    var date = new Date(parseInt(dmy[0], 10), parseInt(dmy[1], 10) - 1, parseInt(dmy[2], 10));
     			    availability[formatDate(date)] = d[1];
     			    return [ date.getTime(), d[1] ];
     			  });
-  			  
+    			  
     			  graph = $$('.graph canvas')[0];
     			  graph.width = 752;
     			  graph.height = 128;
