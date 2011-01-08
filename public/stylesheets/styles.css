@@ -743,7 +743,8 @@ dd small {
   vertical-align: bottom;
 }
 
-.day .new:hover,
+.day-5 .new:hover,
+.day-6 .new:hover,
 .day .show {
   color: #ec008c;
 }
