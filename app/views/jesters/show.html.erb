@@ -160,13 +160,13 @@
     			  }
             
             drawSpline(context, pts, 0.2);
-          
+
             play_data.each(function(d) {
               if (d[1] == 'player' || d[1] == 'mc') {
                 context.fillStyle = d[1] == 'player' ? 'rgba(141,198,63,0.5)' : 'rgba(0,174,239,0.5)';
                 x = (d[0] - (date - window)) * 752 / window;
                 context.beginPath();
-                context.arc(x, 120 + (d[1] == 'mc' ? 4 : 0), 4, 0, Math.PI * 2);
+                context.arc(x, 120 + (d[1] == 'mc' ? 4 : 0), 4, 0, Math.PI * 2, false);
                 context.fill();
               }
             });
