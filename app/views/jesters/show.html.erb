@@ -56,7 +56,7 @@
 
 <div class="grid_12 alpha omega explain current-percentage">
   <div class="graph" title="The white line is how often you've played over the last 90 days. Green lines are shows when you were available, and red lines are when you weren't. Green dots are when you played, and blue dots are when you MCed.">
-    <canvas></canvas>
+    <canvas id="graph-canvas"></canvas>
   </div>
 </div>
 
@@ -121,7 +121,7 @@
     			    return [ date.getTime(), d[1] ];
     			  });
     			  
-    			  graph = $$('.graph canvas')[0];
+    			  var graph = $('graph-canvas');
     			  graph.width = 752;
     			  graph.height = 128;
     			  context = graph.getContext('2d');
