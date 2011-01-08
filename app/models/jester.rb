@@ -7,6 +7,7 @@ class Jester < ActiveRecord::Base
   
   has_many :availability, :class_name => "Player", :inverse_of => :jester
   has_many :shows, :through => :availability
+  has_many :minties
   
   has_friendly_id :name, :use_slug => true
   

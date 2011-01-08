@@ -1,3 +1,3 @@
 ActiveSupport::Inflector.inflections do |inflect|
-  inflect.singular "minties", "mintie"
+  inflect.irregular "mintie", "minties"
 end

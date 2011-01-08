@@ -2,8 +2,7 @@ class MintiesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @minties = @minties.includes(:category)
-    @minties.select! { |m| m.jester_id == current_jester.id }
+    @minties = current_jester.minties.all
     categorised, custom = @minties.partition(&:category_id?)
     @grouped = categorised.group_by(&:category).to_a.sort_by { |a| a.first.to_s }
     @grouped.push [ nil, custom ] unless custom.empty?
