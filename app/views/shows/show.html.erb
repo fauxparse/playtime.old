@@ -4,6 +4,11 @@
   <h1><%= @show.date.to_s(:long) %></h1>
 <% end %>
 
+<ul class="related-links">
+  <%= previous_show_link @show %>
+  <%= next_show_link @show %>
+</ul>
+
 <% content_tag :div, :class => "show show-cast container_12#{' editable' if can? :edit, @show}" do %>
   <div class="grid_3 mcs alpha">
     <h2>MC</h2>

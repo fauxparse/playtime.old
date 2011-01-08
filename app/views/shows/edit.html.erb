@@ -8,7 +8,6 @@
   <li><%= link_to "Edit availability", availability_path(*@show.params) %></li>
 </ul>
 
-
 <% form_for @show, :as => :show, :url => show_path(@show.date.year, @show.date.month, @show.date.day), :method => :put do |form| %>
   <div class="cast-editor container_12">
     <div class="grid_6 alpha cast">
