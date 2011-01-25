@@ -5,7 +5,7 @@ class Jester < ActiveRecord::Base
     
   end
   
-  has_many :availability, :class_name => "Player", :inverse_of => :jester
+  has_many :availability, :class_name => "Player", :inverse_of => :jester, :include => :show, :order => "shows.date ASC"
   has_many :shows, :through => :availability
   has_many :minties
   
