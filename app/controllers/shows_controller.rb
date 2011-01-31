@@ -40,11 +40,19 @@ class ShowsController < ApplicationController
 
 protected
   def date
-    @date ||= Date.civil(
-      (params[:year] || Date.today.year).to_i,
-      (params[:month] || Date.today.month).to_i,
-      (params[:day] || Date.today.day).to_i
-    )
+    @date ||= if params[:year]
+      if params[:month]
+        if params[:day]
+          Date.civil params[:year].to_i, params[:month].to_i, params[:day.to_i]
+        else
+          Date.civil params[:year].to_i, params[:month.to_i], 1]
+        end
+      else
+        Date.civil params[:year].to_i, 1, 1
+      end
+    else
+      Date.today
+    end
   end
 
 end
