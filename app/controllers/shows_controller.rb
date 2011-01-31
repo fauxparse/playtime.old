@@ -43,7 +43,7 @@ protected
     @date ||= if params[:year]
       if params[:month]
         if params[:day]
-          Date.civil params[:year].to_i, params[:month].to_i, params[:day.to_i]
+          Date.civil params[:year].to_i, params[:month].to_i, params[:day].to_i
         else
           Date.civil params[:year].to_i, params[:month].to_i, 1
         end
