@@ -73,6 +73,8 @@ class Show < ActiveRecord::Base
   end
   memoize :playing
   
+  alias_method :cast, :playing
+  
   def ushers
     players.select(&:ushering?).map(&:jester)
   end

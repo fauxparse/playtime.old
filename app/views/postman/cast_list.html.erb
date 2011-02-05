@@ -8,9 +8,9 @@
   </p>
   
   <dl>
-    <% %w(mcs players musos ushers).each do |role| %>
+    <% %w(mcs cast musos ushers).each do |role| %>
       <% unless (jesters = @show.send(role)).empty? %>
-        <dt><%= role == "mcs" ? "MC" : role.titleize %></dt>
+        <dt><%= role == "mcs" ? "MC" : role == "ushers" ? "Ushers" : role.singularize.titleize %></dt>
         <%= jesters.map { |j| content_tag(:dd, j) }.join.html_safe %>
       <% end %>
     <% end %>
