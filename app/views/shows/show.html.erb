@@ -9,7 +9,7 @@
   <%= next_show_link @show %>
 </ul>
 
-<% content_tag :div, :class => "show show-cast container_12#{' editable' if can? :edit, @show}" do %>
+<%= content_tag :div, :class => "show show-cast container_12#{' editable' if can? :edit, @show}" do %>
   <div class="grid_3 mcs alpha">
     <h2>MC</h2>
     <%= render :partial => "shows/player", :collection => @show.players.select(&:mcing?) %>
