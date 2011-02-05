@@ -35,6 +35,9 @@ class ShowsController < ApplicationController
     @show = Show.find_by_date(date, :include => { :players => :jester })
     authorize! :update, @show
     @show.update_attributes params[:show]
+    unless @show.players.empty?
+      Postman.cast_list(@show, current_jester).deliver
+    end
     redirect_to show_path(*@show.params)
   end
 
