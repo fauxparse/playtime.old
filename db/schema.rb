@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110107193813) do
+ActiveRecord::Schema.define(:version => 20110207093101) do
 
   create_table "jesters", :force => true do |t|
     t.string   "first_name",                                :null => false
@@ -36,10 +36,13 @@ ActiveRecord::Schema.define(:version => 20110107193813) do
     t.string   "cached_slug"
     t.string   "image"
     t.string   "type",                :default => "Jester", :null => false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
   add_index "jesters", ["cached_slug"], :name => "index_jesters_on_cached_slug", :unique => true
-  add_index "jesters", ["type", "active"], :name => "index_jesters_on_type_and_active"
 
   create_table "minties", :force => true do |t|
     t.integer "category_id"

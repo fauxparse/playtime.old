@@ -10,6 +10,24 @@ class Jester < ActiveRecord::Base
   has_many :minties
   
   has_friendly_id :name, :use_slug => true
+
+  has_attached_file :photo,
+    :storage => :s3,
+    :s3_credentials => Rails.env.development? ? File.join(Rails.root, "config/s3.yml") : {
+      :access_key_id => ENV['S3_KEY'],
+      :secret_access_key => ENV['S3_SECRET']
+    },
+    :s3_host_alias => "s3.courtjesters.org.nz",
+    :s3_headers => { "Expires" => 1.year.from_now.httpdate },
+    :bucket => "s3.courtjesters.org.nz",
+    :path => ":attachment/:id/:style.:extension",
+    :url => ":s3_alias_url",
+    :styles => {
+      :tiny => "24x24#",
+      :small => "32x32#",
+      :medium => "48x48#",
+      :large => "240x240#"
+    }
   
   scope :admin, where(:admin => true)
   scope :active, where("active = ? AND type = ?", true, Jester)
@@ -70,7 +88,7 @@ class Jester < ActiveRecord::Base
   
   def favourite_players(n = 5)
     Jester.find_by_sql <<-SQL
-      SELECT j.id, j.first_name, j.last_name, j.name, j.admin, j.image, j.cached_slug, COUNT(j.id) AS frequency
+      SELECT j.id, j.first_name, j.last_name, j.name, j.admin, j.image, j.cached_slug, j.photo_file_name, j.photo_updated_at, COUNT(j.id) AS frequency
       FROM shows s
       JOIN players mc ON mc.show_id = s.id
       JOIN players p ON p.show_id = s.id
@@ -78,7 +96,7 @@ class Jester < ActiveRecord::Base
       WHERE mc.role = 'mc'
       AND mc.jester_id = #{id}
       AND p.role = 'player'
-      GROUP BY j.id, j.first_name, j.last_name, j.name, j.admin, j.image, j.cached_slug
+      GROUP BY j.id, j.first_name, j.last_name, j.name, j.admin, j.image, j.cached_slug, j.photo_file_name, j.photo_updated_at
       ORDER BY frequency DESC
       LIMIT #{n}
     SQL
@@ -87,7 +105,7 @@ class Jester < ActiveRecord::Base
   
   def most_seen_with(n = 5)
     Jester.find_by_sql <<-SQL
-      SELECT j.id, j.first_name, j.last_name, j.name, j.admin, j.image, j.cached_slug, COUNT(j.id) AS frequency
+      SELECT j.id, j.first_name, j.last_name, j.name, j.admin, j.image, j.cached_slug, j.photo_file_name, j.photo_updated_at, COUNT(j.id) AS frequency
       FROM shows s
       JOIN players me ON me.show_id = s.id
       JOIN players p ON p.show_id = s.id
@@ -96,7 +114,7 @@ class Jester < ActiveRecord::Base
       AND me.jester_id = #{id}
       AND p.jester_id <> #{id}
       AND p.role = 'player'
-      GROUP BY j.id, j.first_name, j.last_name, j.name, j.admin, j.image, j.cached_slug
+      GROUP BY j.id, j.first_name, j.last_name, j.name, j.admin, j.image, j.cached_slug, j.photo_file_name, j.photo_updated_at
       ORDER BY frequency DESC
       LIMIT #{n}
     SQL

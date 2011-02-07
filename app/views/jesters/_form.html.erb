@@ -29,6 +29,10 @@
       <%= form.password_field :password_confirmation, :placeholder => "••••••••", :class => :text %>
     </div>
   </li>
+  <li>
+    <%= form.label :photo %>
+    <%= form.file_field :photo %>
+  </li>
   <% if can? :destroy, Jester %>
     <li class="checkbox">
       <%= form.check_box :active %>

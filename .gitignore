@@ -4,3 +4,4 @@ log/*.log
 tmp/**/*
 db/seeds.rb
 tmp/*
+config/s3.yml

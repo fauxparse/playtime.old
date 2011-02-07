@@ -28,11 +28,21 @@ module JestersHelper
   end
   
   def portrait(jester, size = 32)
-    filename = "/images/jesters/#{size}/#{jester.image}.jpg"
-    url = if File.exist?(File.join(Rails.root, "public", filename))
-      filename
+    if jester.photo?
+      size = case size
+      when 24 then :tiny
+      when 32 then :small
+      when 48 then :medium
+      else size
+      end
+      url = jester.photo.url(size)
     else
-      "http://placehold.it/#{size}x#{size}&text=Jester"
+      filename = "/images/jesters/#{size}/#{jester.image}.jpg"
+      url = if File.exist?(File.join(Rails.root, "public", filename))
+        filename
+      else
+        "http://placehold.it/#{size}x#{size}&text=Jester"
+      end
     end
     image_tag url, :alt => jester.to_s
   end
