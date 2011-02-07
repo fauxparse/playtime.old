@@ -22,11 +22,11 @@
   <li class="password">
     <div class="split">
       <%= form.label :password, form.object.new_record? ? nil : "Change password" %>
-      <%= form.password_field :password, :placeholder => "••••••••", :class => :text %>
+      <%= form.password_field :password, :placeholder => "••••••••", :autocomplete => :off, :class => :text %>
     </div>
     <div class="split">
       <%= form.label :password_confirmation, "Confirm" %>
-      <%= form.password_field :password_confirmation, :placeholder => "••••••••", :class => :text %>
+      <%= form.password_field :password_confirmation, :placeholder => "••••••••", :autocomplete => :off, :class => :text %>
     </div>
   </li>
   <li>
