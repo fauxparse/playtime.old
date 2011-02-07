@@ -81,7 +81,7 @@ class Show < ActiveRecord::Base
   memoize :ushers
   
   def all_in?
-    players.any? && !players.any? { |p| p.role.blank? }
+    cast.any? && !players.any? { |p| p.role.blank? }
   end
   
   def calendar_description
