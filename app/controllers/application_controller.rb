@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   check_authorization
 
+  before_filter :fix_domain
   before_filter :require_login
 
   rescue_from CanCan::AccessDenied do |exception|
@@ -49,5 +50,12 @@ protected
   def current_ability
     @current_ability ||= Ability.new(current_jester)
   end
+
+  def fix_domain
+    if Rails.env.production? && request.host.starts_with?("www")
+      redirect_to "http://courtjesters.org.nz#{request.path}"
+    end
+  end
+  
   
 end
