@@ -61,7 +61,7 @@ GEM
       launchy (~> 0.3.2)
       rest-client (>= 1.4.0, < 1.7.0)
     i18n (0.5.0)
-    kgio (2.1.1)
+    kgio (2.3.0)
     launchy (0.3.7)
       configuration (>= 0.0.5)
       rake (>= 0.8.1)
@@ -105,8 +105,8 @@ GEM
     treetop (1.4.9)
       polyglot (>= 0.3.1)
     tzinfo (0.3.23)
-    unicorn (3.3.1)
-      kgio (~> 2.1)
+    unicorn (3.4.0)
+      kgio (~> 2.2)
       rack
     xml-simple (1.0.12)
 
