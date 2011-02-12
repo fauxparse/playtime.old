@@ -23,7 +23,7 @@ class ShowsController < ApplicationController
   end
   
   def edit
-    @show = Show.find_by_date(date, :include => { :players => :jester })
+    @show = Show.find_by_date(date, :include => { :players => { :jester => :availability } })
     unless @show
       redirect_to availability_path(*@show.params)
     end

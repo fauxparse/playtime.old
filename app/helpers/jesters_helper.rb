@@ -7,14 +7,19 @@ module JestersHelper
     end
   end
   
-  def play_percentage(jester, window = 90.days)
+  def play_percentage(jester, window = 90.days, do_tag = true)
     availability = jester.availability.select { |a| a.show.date > Date.today - window }
     percentage = if availability.any?
       100.0 * availability.select(&:playing?).length / availability.length
     else
       0.0
     end
-    content_tag :div, "%.1f%%" % percentage, :class => :"play-percentage data", :"data-value" => percentage
+    content = "%.1f%%" % percentage
+    if do_tag
+      content_tag :div, content, :class => :"play-percentage data", :"data-value" => percentage
+    else
+      content
+    end
   end
   
   def last_played(jester)

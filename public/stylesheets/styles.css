@@ -881,6 +881,12 @@ ul.casting li {
   -moz-border-radius: 4px;
 }
 
+ul.casting li small {
+  font-weight: normal;
+  color: #999;
+  text-shadow: none;
+}
+
 ul.casting li img {
   position: absolute;
   left: 0px;
