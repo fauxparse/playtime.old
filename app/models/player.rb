@@ -7,7 +7,7 @@ class Player < ActiveRecord::Base
   scope :musoing, where(:role => :muso)
   scope :playing_or_mcing, where(:role => [ :player, :mc ])
   
-  delegate :to_s, :image, :name, :to => :jester
+  delegate :to_s, :image, :name, :photo, :photo?, :to => :jester
   
   before_save :nil_not_blank!
 
