@@ -7,9 +7,7 @@ class AvailabilityController < ApplicationController
   def update
     params[:shows] ||= {}
     shows.each do |show|
-      if can? :update, show
-        show.update_attributes(params[:shows][show.date.to_s(:db)] || { :availability => [] })
-      end
+      show.update_attributes(params[:shows][show.date.to_s(:db)] || { :availability => [] })
     end
     redirect_to availability_path(date.year, date.month, date.day)
   end
