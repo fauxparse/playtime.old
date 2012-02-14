@@ -6,7 +6,7 @@ class Postman < ActionMailer::Base
     @show = show
     @editor = editor
     mail  :to => @interested_parties.collect(&:email),
-          :cc => "fauxparse@gmail.com",
+          :cc => "fauxparse@gmail.com, matt@courttheatre.org.nz",
           :subject => "Cast for #{show.date.strftime("%e/%m/%y")}"
   end
 end
